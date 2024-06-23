@@ -25,9 +25,32 @@
             border-radius: 5px;
             width: 100%;
             margin-bottom: 10px;
-            color: #D998A7; /* Text color for inputs */
-            text-align: center; /* Center align the text */
         }
         input[type="submit"] {
             background-color: #FFE6F1;
-      
+            color: #D998A7;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div class="calculator">
+        <form id="calculatorForm">
+            <label for="item_price">Item Price:</label>
+            <input type="number" id="item_price" name="item_price" required><br><br>
+
+            <label for="tax_rate">Tax Rate (%):</label>
+            <input type="number" id="tax_rate" name="tax_rate" required><br><br>
+
+            <label for="profit">Desired Profit (coins):</label>
+            <input type="number" id="profit" name="profit" required><br><br>
+
+            <input type="submit" value="Calculate">
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

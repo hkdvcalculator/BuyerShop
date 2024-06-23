@@ -21,13 +21,25 @@
             width: 320px; /* Increased width slightly for better centering */
             box-sizing: border-box; /* Ensures padding and border are included in width */
         }
-        input[type="number"], input[type="submit"] {
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #FFFFFF;
+            padding: 0 5px;
+            transition: top 0.3s, font-size 0.3s;
+        }
+        .form-group input[type="number"] {
             padding: 8px;
             font-size: 16px;
             border: 1px solid #D998A7;
             border-radius: 5px;
-            width: 100%;
-            margin-bottom: 10px;
+            width: calc(100% - 22px); /* Adjust width for padding and border */
             text-align: center; /* Center align the text */
             color: #D998A7; /* Text color for inputs */
         }
@@ -35,6 +47,14 @@
             background-color: #FFE6F1;
             color: #D998A7;
             cursor: pointer;
+            border: none; /* Remove border for submit button */
+            padding: 8px 20px; /* Adjust padding for submit button */
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #FFC9E1; /* Darker background color on hover */
         }
         #result {
             margin-top: 20px;
@@ -58,14 +78,20 @@
     <h1>Calculator</h1>
     <div class="calculator">
         <form id="calculatorForm">
-            <label for="item_price">Item Price:</label>
-            <input type="number" id="item_price" name="item_price" required><br><br>
+            <div class="form-group">
+                <label for="item_price">Item Price:</label>
+                <input type="number" id="item_price" name="item_price" required>
+            </div>
 
-            <label for="tax_rate">Tax Rate (%):</label>
-            <input type="number" id="tax_rate" name="tax_rate" required><br><br>
+            <div class="form-group">
+                <label for="tax_rate">Tax Rate (%):</label>
+                <input type="number" id="tax_rate" name="tax_rate" required>
+            </div>
 
-            <label for="profit">Desired Profit (coins):</label>
-            <input type="number" id="profit" name="profit" required><br><br>
+            <div class="form-group">
+                <label for="profit">Desired Profit (coins):</label>
+                <input type="number" id="profit" name="profit" required>
+            </div>
 
             <input type="submit" value="Calculate">
         </form>
@@ -76,13 +102,42 @@
     </div>
 
     <script>
+        // Function to handle input focus and blur events
+        document.addEventListener('DOMContentLoaded', function() {
+            var formGroups = document.querySelectorAll('.form-group');
+
+            formGroups.forEach(function(formGroup) {
+                var input = formGroup.querySelector('input');
+                var label = formGroup.querySelector('label');
+
+                input.addEventListener('focus', function() {
+                    label.style.top = '10px';
+                    label.style.fontSize = '12px';
+                });
+
+                input.addEventListener('blur', function() {
+                    if (input.value === '') {
+                        label.style.top = '50%';
+                        label.style.fontSize = '16px';
+                    }
+                });
+
+                // Check initial input state
+                if (input.value !== '') {
+                    label.style.top = '10px';
+                    label.style.fontSize = '12px';
+                }
+            });
+        });
+
+        // Function to calculate and update result
         document.getElementById('calculatorForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form submission
 
             // Retrieve input values
-            var itemPrice = parseFloat(document.getElementById('item_price').value);
-            var taxRate = parseFloat(document.getElementById('tax_rate').value);
-            var profit = parseFloat(document.getElementById('profit').value);
+            var itemPrice = parseFloat(document.getElementById('item_price').value) || 0; // Default to 0 if empty or invalid
+            var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0; // Default to 0 if empty or invalid
+            var profit = parseFloat(document.getElementById('profit').value) || 0; // Default to 0 if empty or invalid
 
             // Calculate new price including tax and profit
             var taxAmount = (itemPrice * taxRate) / 100;

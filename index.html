@@ -27,21 +27,26 @@
         }
         .form-group label {
             position: absolute;
-            left: 10px;
+            left: 50%;
             top: 50%;
-            transform: translateY(-50%);
-            background-color: #FFFFFF;
-            padding: 0 5px;
-            transition: top 0.3s, font-size 0.3s;
+            transform: translate(-50%, -50%);
+            color: #D998A7;
+            pointer-events: none; /* Prevent label from interfering with input */
+            transition: top 0.3s, font-size 0.3s, transform 0.3s;
         }
         .form-group input[type="number"] {
             padding: 8px;
             font-size: 16px;
             border: 1px solid #D998A7;
             border-radius: 5px;
-            width: calc(100% - 22px); /* Adjust width for padding and border */
+            width: 100%;
             text-align: center; /* Center align the text */
             color: #D998A7; /* Text color for inputs */
+            transition: border-color 0.3s, width 0.3s; /* Transition for border color and width */
+        }
+        .form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #FFC9E1; /* Highlight border color on focus */
         }
         input[type="submit"] {
             background-color: #FFE6F1;
@@ -102,50 +107,33 @@
     </div>
 
     <script>
-        // Function to handle input focus and blur events
         document.addEventListener('DOMContentLoaded', function() {
-            var formGroups = document.querySelectorAll('.form-group');
+            var inputs = document.querySelectorAll('.form-group input[type="number"]');
 
-            formGroups.forEach(function(formGroup) {
-                var input = formGroup.querySelector('input');
-                var label = formGroup.querySelector('label');
-
-                input.addEventListener('focus', function() {
-                    label.style.top = '10px';
-                    label.style.fontSize = '12px';
+            // Adjust input width based on content length
+            inputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    this.style.width = (this.value.length + 1) * 8 + 'px'; // Adjust width based on input length
                 });
-
-                input.addEventListener('blur', function() {
-                    if (input.value === '') {
-                        label.style.top = '50%';
-                        label.style.fontSize = '16px';
-                    }
-                });
-
-                // Check initial input state
-                if (input.value !== '') {
-                    label.style.top = '10px';
-                    label.style.fontSize = '12px';
-                }
             });
-        });
 
-        // Function to calculate and update result
-        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
+            // Calculate and display result on form submission
+            document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
 
-            // Retrieve input values
-            var itemPrice = parseFloat(document.getElementById('item_price').value) || 0; // Default to 0 if empty or invalid
-            var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0; // Default to 0 if empty or invalid
-            var profit = parseFloat(document.getElementById('profit').value) || 0; // Default to 0 if empty or invalid
+                // Retrieve input values
+                var itemPrice = parseFloat(document.getElementById('item_price').value) || 0;
+                var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
+                var profit = parseFloat(document.getElementById('profit').value) || 0;
 
-            // Calculate new price including tax and profit
-            var taxAmount = (itemPrice * taxRate) / 100;
-            var newPrice = Math.round(itemPrice + taxAmount + profit); // Round to whole number
+                // Calculate new price including tax and profit
+                var taxAmount = (itemPrice * taxRate) / 100;
+                var newPrice = Math.round(itemPrice + taxAmount + profit);
 
-            // Display result
-            var resultElement = document.querySelector('#result .output-number');
-            resultElement.textContent = newPrice + " coins";
+                // Display result
+                var resultElement = document.querySelector('#result .output-number');
+                resultElement.textContent = newPrice + " coins";
+            });
         });
     </script>
 </body>

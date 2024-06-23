@@ -22,17 +22,14 @@
             box-sizing: border-box; /* Ensures padding and border are included in width */
         }
         .form-group {
-            position: relative;
             margin-bottom: 20px;
+            text-align: center; /* Center align the form group */
         }
         .form-group label {
-            position: absolute;
-            left: 20px; /* Adjust as needed */
-            top: 50%;
-            transform: translateY(-50%);
-            color: #D998A7;
-            pointer-events: none; /* Prevent label from interfering with input */
-            transition: top 0.3s, font-size 0.3s, transform 0.3s;
+            display: block; /* Display block to ensure labels are on top of inputs */
+            margin-bottom: 5px; /* Margin for spacing */
+            font-weight: bold; /* Bold font for labels */
+            color: #D998A7; /* Text color for labels */
         }
         .form-group input[type="number"] {
             padding: 8px;

@@ -10,13 +10,16 @@
             background-color: #FFFFFF;
             color: #D998A7;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
         .calculator {
             margin: 20px auto;
             padding: 20px;
             border: 2px solid #D998A7;
             border-radius: 10px;
-            width: 300px;
+            width: 320px; /* Increased width slightly for better centering */
+            box-sizing: border-box; /* Ensures padding and border are included in width */
         }
         input[type="number"], input[type="submit"] {
             padding: 8px;
@@ -43,14 +46,11 @@
         }
         #result p {
             margin: 5px 0; /* Adjust margin for spacing */
-        }
-        #result .output-text {
-            color: #D998A7; /* Text color for output text */
-            font-weight: bold; /* Bold font for output text */
+            font-weight: bold; /* Bold font for result text */
+            color: #D998A7; /* Text color for result text */
         }
         #result .output-number {
             color: #D998A7; /* Text color for output number */
-            font-weight: bold; /* Bold font for output number */
         }
     </style>
 </head>

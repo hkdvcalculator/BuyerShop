@@ -33,6 +33,11 @@
             color: #D998A7;
             cursor: pointer;
         }
+        #result {
+            margin-top: 20px; /* Space between form and result */
+            text-align: center; /* Center align the result */
+            color: #333; /* Color for the result text */
+        }
     </style>
 </head>
 <body>
@@ -53,6 +58,23 @@
         <div id="result"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Retrieve input values
+            var itemPrice = parseFloat(document.getElementById('item_price').value);
+            var taxRate = parseFloat(document.getElementById('tax_rate').value);
+            var profit = parseFloat(document.getElementById('profit').value);
+
+            // Calculate new price including tax and profit
+            var taxAmount = (itemPrice * taxRate) / 100;
+            var newPrice = itemPrice + taxAmount + profit;
+
+            // Display result
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = "<p>New price including tax and profit:</p><p>" + newPrice.toFixed(2) + " coins</p>";
+        });
+    </script>
 </body>
 </html>

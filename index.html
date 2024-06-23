@@ -25,11 +25,26 @@
             border-radius: 5px;
             width: 100%;
             margin-bottom: 10px;
+            text-align: center; /* Center align the text */
         }
         input[type="submit"] {
             background-color: #FFE6F1;
             color: #D998A7;
             cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center; /* Center align the result text */
+        }
+        #result p {
+            margin: 5px 0; /* Adjust margin for spacing */
+        }
+        #result .output-text {
+            color: #D998A7; /* Text color for output text */
+            font-weight: bold; /* Bold font for output text */
+        }
+        #result .output-number {
+            color: #333; /* Text color for output number */
         }
     </style>
 </head>
@@ -48,9 +63,29 @@
 
             <input type="submit" value="Calculate">
         </form>
-        <div id="result"></div>
+        <div id="result">
+            <p class="output-text">New price including tax and profit:</p>
+            <p class="output-number"></p>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Retrieve input values
+            var itemPrice = parseFloat(document.getElementById('item_price').value);
+            var taxRate = parseFloat(document.getElementById('tax_rate').value);
+            var profit = parseFloat(document.getElementById('profit').value);
+
+            // Calculate new price including tax and profit
+            var taxAmount = (itemPrice * taxRate) / 100;
+            var newPrice = itemPrice + taxAmount + profit;
+
+            // Display result
+            var resultElement = document.querySelector('#result .output-number');
+            resultElement.textContent = newPrice.toFixed(2) + " coins";
+        });
+    </script>
 </body>
 </html>

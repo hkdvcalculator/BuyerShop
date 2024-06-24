@@ -101,7 +101,7 @@
         .history-box ul li::before {
             content: "";
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 10%;
             width: 80%;
             height: 2px;
@@ -110,7 +110,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -118,7 +118,7 @@
             z-index: 2;
             font-size: 14px;
             color: #D998A7;
-            border-radius: 5px; /* Changed to round the white box */
+            border-radius: 5px;
         }
         .history-box .decorative-line {
             height: 2px;
@@ -134,7 +134,7 @@
         .history-box .decorative-line::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
             position: absolute;
-            top: -10px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 14px;
@@ -142,7 +142,18 @@
             background-color: white;
             padding: 0 10px;
             border-radius: 10px;
-            z-index: 2; /* Ensures decorative text is above the line */
+            z-index: 2;
+        }
+        .screenshot-reminder {
+            background-color: #FFE6F1;
+            color: #D998A7;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 20px auto;
+            width: 80%;
+            font-size: 16px;
+            text-align: center;
         }
     </style>
 </head>
@@ -179,6 +190,9 @@
     <div class="history-box">
         Previous Calculations:
         <div class="decorative-line"></div>
+        <div class="screenshot-reminder">
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
+        </div>
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>

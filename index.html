@@ -147,19 +147,19 @@
 
         /* Dark Mode */
         .dark-mode {
-            background-color: #2b2b2b;
-            color: #ffffff;
+            background-color: #1e1e1e;
+            color: #B0B3B8;
         }
         .dark-mode .info-box,
         .dark-mode .history-box,
         .dark-mode .screenshot-reminder {
-            background-color: #4a4a4a;
-            border-color: #ffffff;
-            color: #ffffff;
+            background-color: #3c3c3c;
+            border-color: #B0B3B8;
+            color: #B0B3B8;
         }
         .dark-mode .history-box ul li,
         .dark-mode .screenshot-reminder {
-            color: #ffffff;
+            color: #B0B3B8;
         }
 
         /* Pink Mode */
@@ -176,6 +176,32 @@
         }
         .pink-mode .history-box ul li,
         .pink-mode .screenshot-reminder {
+            color: #D998A7;
+        }
+
+        /* Cute buttons */
+        .mode-button {
+            background-color: #FFE6F1;
+            color: #D998A7;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 10px;
+        }
+        .mode-button:hover {
+            background-color: #FFC9E1;
+        }
+
+        .dark-mode-button {
+            background-color: #4d4d4d;
+            color: #B0B3B8;
+        }
+
+        .pink-mode-button {
+            background-color: #FFC9E1;
             color: #D998A7;
         }
     </style>
@@ -221,9 +247,9 @@
         </ul>
     </div>
 
-    <!-- Dark mode and pink mode buttons -->
-    <button id="darkModeButton">Dark Mode</button>
-    <button id="pinkModeButton">Pink Mode</button>
+    <!-- Cute mode buttons -->
+    <button id="darkModeButton" class="mode-button dark-mode-button">Dark Mode</button>
+    <button id="pinkModeButton" class="mode-button pink-mode-button">Pink Mode</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

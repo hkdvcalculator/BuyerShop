@@ -109,29 +109,6 @@
             background-color: white;
             z-index: 1;
         }
-        .decorative-line {
-            height: 2px;
-            background-color: white;
-            margin: 30px auto 20px; /* Adjust for equal spacing above and below */
-            width: 80%;
-            color: #D998A7;
-            position: relative;
-            text-align: center;
-            padding: 0 10px;
-            border-radius: 10px;
-        }
-        .decorative-line::before {
-            content: ""; /* Remove the decorative text content */
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            color: #D998A7;
-            background-color: white;
-            padding: 0 10px;
-            border-radius: 10px;
-        }
         .screenshot-reminder {
             background-color: #FFE6F1;
             color: #D998A7;
@@ -178,7 +155,9 @@
     <div class="history-box">
         Previous Calculations:
         <div class="decorative-line"></div>
-        <!-- Remove the decorative text box -->
+        <div class="screenshot-reminder">
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
+        </div>
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>

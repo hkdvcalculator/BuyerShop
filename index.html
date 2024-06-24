@@ -103,23 +103,11 @@
             position: absolute;
             top: 10px; /* Adjust for spacing above decorative line */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             width: 80%;
             height: 2px;
             background-color: white;
             z-index: 1;
-        }
-        .history-box ul li span.decorative-text {
-            position: absolute;
-            top: 10px; /* Adjust for spacing above decorative text */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 0 10px;
-            z-index: 2;
-            font-size: 14px;
-            color: #D998A7;
-            border-radius: 10px; /* Adjusted to match the rounded style */
         }
         .decorative-line {
             height: 2px;
@@ -133,7 +121,7 @@
             border-radius: 10px;
         }
         .decorative-line::before {
-            content: "⋅˚₊‧𐙚‧₊˚ ⋅";
+            content: ""; /* Remove the decorative text content */
             position: absolute;
             top: -10px;
             left: 50%;
@@ -190,9 +178,7 @@
     <div class="history-box">
         Previous Calculations:
         <div class="decorative-line"></div>
-        <div class="screenshot-reminder">
-            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
-        </div>
+        <!-- Remove the decorative text box -->
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>

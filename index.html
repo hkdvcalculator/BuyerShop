@@ -96,13 +96,14 @@
             color: #D998A7;
             position: relative;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px; /* Adjust for spacing above decorative text */
         }
         .history-box ul li::before {
             content: "";
             position: absolute;
-            top: 20%;
-            left: 10%;
+            top: 10px; /* Adjust for spacing above decorative line */
+            left: 50%;
+            transform: translateX(-50%);
             width: 80%;
             height: 2px;
             background-color: white;
@@ -110,7 +111,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 20%;
+            top: 10px; /* Adjust for spacing above decorative text */
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -120,10 +121,10 @@
             color: #D998A7;
             border-radius: 5px;
         }
-        .history-box .decorative-line {
+        .decorative-line {
             height: 2px;
             background-color: white;
-            margin: 10px auto;
+            margin: 30px auto 20px; /* Adjust for equal spacing above and below */
             width: 80%;
             color: #D998A7;
             position: relative;
@@ -131,10 +132,10 @@
             padding: 0 10px;
             border-radius: 10px;
         }
-        .history-box .decorative-line::before {
+        .decorative-line::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
             position: absolute;
-            top: -20px;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 14px;
@@ -142,7 +143,6 @@
             background-color: white;
             padding: 0 10px;
             border-radius: 10px;
-            z-index: 2;
         }
         .screenshot-reminder {
             background-color: #FFE6F1;

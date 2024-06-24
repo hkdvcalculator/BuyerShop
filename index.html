@@ -109,7 +109,7 @@
             transform: translateX(-50%);
             width: 80%;
             height: 2px;
-            background-color: #B0B3B8; /* Font color for dark mode */
+            background-color: #FFFFFF; /* Default color for lines in history box */
             z-index: 1;
         }
         .history-box ul li span.decorative-text {
@@ -117,7 +117,7 @@
             top: 10px;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #B0B3B8;
+            background-color: #FFFFFF; /* Default color for decorative text */
             padding: 0 10px;
             z-index: 2;
             font-size: 14px;
@@ -126,7 +126,7 @@
         }
         .decorative-line {
             height: 2px;
-            background-color: #B0B3B8; /* Font color for dark mode */
+            background-color: #FFFFFF; /* Default color for decorative line */
             margin: 30px auto 20px;
             width: 80%;
             position: relative;
@@ -160,25 +160,44 @@
             background-color: #3c3c3c;
             border-color: #B0B3B8;
         }
+        body.dark-mode .history-box ul li::before,
+        body.dark-mode .decorative-line,
+        body.dark-mode .history-box {
+            background-color: #3c3c3c; /* Preserve dark mode for these elements */
+        }
+
+        /* Pink Mode */
+        body.pink-mode {
+            background-color: #FFE6F1;
+            color: #D998A7; /* Font color for pink mode */
+        }
+        body.pink-mode .calculator {
+            background-color: #FFE6F1;
+            border-color: #D998A7;
+            color: #D998A7; /* Font color for pink mode */
+        }
+        body.pink-mode #result {
+            background-color: #FFFFFF;
+            border-color: #D998A7;
+        }
 
         /* Black & White Mode */
         body.bw-mode {
-            background-color: #FFFFFF;
+            background-color: #000000;
             color: #000000; /* Font color for black & white mode */
         }
         body.bw-mode .calculator {
-            background-color: #FFFFFF;
+            background-color: #000000;
             border-color: #000000;
-            color: #000000; /* Font color for black & white mode */
+            color: #FFFFFF; /* Font color for black & white mode */
         }
         body.bw-mode #result {
-            background-color: #FFFFFF;
+            background-color: #000000;
             border-color: #000000;
         }
 
         /* Cute heart-shaped buttons */
         .mode-button {
-            background-color: #FFE6F1;
             color: #D998A7;
             border: none;
             padding: 10px 20px;
@@ -194,17 +213,14 @@
 
         .dark-mode-button {
             background-color: #4d4d4d;
-            color: #B0B3B8; /* Font color for dark mode */
         }
 
         .pink-mode-button {
             background-color: #FFE6F1;
-            color: #D998A7;
         }
 
         .bw-mode-button {
             background-color: #1e1e1e;
-            color: #FFFFFF; /* Font color for black & white mode */
         }
     </style>
 </head>
@@ -267,34 +283,43 @@
             document.getElementById('calculatorForm').addEventListener('submit', function(event) {
                 event.preventDefault();
 
-                var itemPrice = parseFloat(document.getElementById('item_price').value) || 0;
-                var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
-                var profit = parseFloat(document.getElementById('profit').value) || 0;
+                var itemPrice = parseFloat(document.getElementById('item_price').value);
+                var taxRate = parseFloat(document.getElementById('tax_rate').value);
+                var desiredProfit = parseFloat(document.getElementById('profit').value);
 
-                var taxAmount = (itemPrice * taxRate) / 100;
-                var newPrice = Math.round(itemPrice + taxAmount + profit);
+                if (!isNaN(itemPrice) && !isNaN(taxRate) && !isNaN(desiredProfit)) {
+                    var taxAmount = (itemPrice * (taxRate / 100)).toFixed(2);
+                    var totalPrice = itemPrice + parseFloat(taxAmount) + desiredProfit;
 
-                var resultElement = document.querySelector('#result .output-number');
-                resultElement.textContent = newPrice + " coins";
+                    var resultElement = document.querySelector('#result .output-number');
+                    resultElement.textContent = totalPrice.toFixed(2);
+                }
 
+                // Clear input fields after calculation
+                document.getElementById('calculatorForm').reset();
+
+                // Store calculation history
                 var historyList = document.getElementById('historyList');
-                var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins";
-                historyList.appendChild(newHistoryItem);
+                var li = document.createElement('li');
+                li.textContent = 'Total price including tax and profit: ' + totalPrice.toFixed(2);
+                historyList.appendChild(li);
             });
 
+            // Toggle Dark Mode
             document.getElementById('darkModeButton').addEventListener('click', function() {
+                document.body.classList.add('dark-mode');
                 document.body.classList.remove('pink-mode');
                 document.body.classList.remove('bw-mode');
-                document.body.classList.add('dark-mode');
             });
 
+            // Toggle Pink Mode
             document.getElementById('pinkModeButton').addEventListener('click', function() {
                 document.body.classList.remove('dark-mode');
-                document.body.classList.remove('bw-mode');
                 document.body.classList.add('pink-mode');
+                document.body.classList.remove('bw-mode');
             });
 
+            // Toggle Black & White Mode
             document.getElementById('bwModeButton').addEventListener('click', function() {
                 document.body.classList.remove('dark-mode');
                 document.body.classList.remove('pink-mode');

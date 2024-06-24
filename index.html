@@ -18,18 +18,18 @@
             padding: 20px;
             border: 2px solid #D998A7;
             border-radius: 10px;
-            width: 320px; /* Increased width slightly for better centering */
-            box-sizing: border-box; /* Ensures padding and border are included in width */
+            width: 320px;
+            box-sizing: border-box;
         }
         .form-group {
             margin-bottom: 20px;
-            text-align: center; /* Center align the form group */
+            text-align: center;
         }
         .form-group label {
-            display: block; /* Display block to ensure labels are on top of inputs */
-            margin-bottom: 5px; /* Margin for spacing */
-            font-weight: bold; /* Bold font for labels */
-            color: #D998A7; /* Text color for labels */
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #D998A7;
         }
         .form-group input[type="number"] {
             padding: 8px;
@@ -37,42 +37,42 @@
             border: 1px solid #D998A7;
             border-radius: 5px;
             width: 100%;
-            text-align: center; /* Center align the text */
-            color: #D998A7; /* Text color for inputs */
-            transition: border-color 0.3s, width 0.3s; /* Transition for border color and width */
+            text-align: center;
+            color: #D998A7;
+            transition: border-color 0.3s, width 0.3s;
         }
         .form-group input[type="number"]:focus {
             outline: none;
-            border-color: #FFC9E1; /* Highlight border color on focus */
+            border-color: #FFC9E1;
         }
         input[type="submit"] {
             background-color: #FFE6F1;
             color: #D998A7;
             cursor: pointer;
-            border: none; /* Remove border for submit button */
-            padding: 8px 20px; /* Adjust padding for submit button */
+            border: none;
+            padding: 8px 20px;
             border-radius: 5px;
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
-            background-color: #FFC9E1; /* Darker background color on hover */
+            background-color: #FFC9E1;
         }
         #result {
             margin-top: 20px;
-            text-align: center; /* Center align the result text */
-            background-color: #FFFFFF; /* Background color for output */
-            padding: 10px; /* Add padding for the result container */
-            border: 1px solid #D998A7; /* Add border to the result container */
-            border-radius: 5px; /* Add border radius to the result container */
+            text-align: center;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border: 1px solid #D998A7;
+            border-radius: 5px;
         }
         #result p {
-            margin: 5px 0; /* Adjust margin for spacing */
-            font-weight: bold; /* Bold font for result text */
-            color: #D998A7; /* Text color for result text */
+            margin: 5px 0;
+            font-weight: bold;
+            color: #D998A7;
         }
         #result .output-number {
-            color: #D998A7; /* Text color for output number */
+            color: #D998A7;
         }
         .info-box, .history-box {
             background-color: #FFE6F1;
@@ -81,43 +81,68 @@
             border-radius: 5px;
             padding: 20px;
             margin: 20px auto;
-            width: 80%; /* Adjust width as needed */
-            font-size: 18px; /* Increase font size if necessary */
+            width: 80%;
+            font-size: 18px;
             text-align: center;
             font-weight: bold;
         }
         .history-box ul {
-            list-style-type: none; /* Remove default list styling */
-            padding: 0; /* Remove default padding */
-            margin: 10px 0 0; /* Adjust margin for spacing */
-            text-align: left; /* Align text to the left within the box */
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 0;
+            text-align: left;
         }
         .history-box ul li {
-            margin-bottom: 40px; /* Add more spacing between list items */
-            color: #D998A7; /* Text color for list items */
-            position: relative; /* Position relative for the separator */
-            padding-top: 20px; /* Add padding at the top to avoid overlap with decorative text */
+            margin-bottom: 40px;
+            color: #D998A7;
+            position: relative;
+            padding-top: 20px;
         }
         .history-box ul li::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
             position: absolute;
-            top: -10px; /* Adjust position as needed */
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 14px; /* Adjust font size if necessary */
+            font-size: 14px;
             color: #D998A7;
             background-color: white;
-            padding: 0 10px; /* Padding to ensure background covers text */
-            border-radius: 10px; /* Optional: add border-radius for rounded edges */
+            padding: 0 10px;
+            border-radius: 10px;
         }
         .history-box ul li::after {
             content: "";
             display: block;
-            height: 2px; /* Semi thick line */
+            height: 2px;
             background-color: white;
-            margin: 10px 0; /* Adjust spacing above and below line */
-            width: 80%; /* Adjust width as needed */
-            margin-left: 10%; /* Center the line */
+            margin: 10px 0;
+            width: 80%;
+            margin-left: 10%;
+        }
+        .history-box .decorative-line {
+            content: "⋅˚₊‧𐙚‧₊˚ ⋅";
+            display: block;
+            height: 2px;
+            background-color: white;
+            margin: 10px auto;
+            width: 80%;
+            color: #D998A7;
+            position: relative;
+            text-align: center;
+            padding: 0 10px;
+            border-radius: 10px;
+        }
+        .history-box .decorative-line::before {
+            content: "⋅˚₊‧𐙚‧₊˚ ⋅";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #D998A7;
+            background-color: white;
+            padding: 0 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -153,6 +178,7 @@
 
     <div class="history-box">
         Previous Calculations:
+        <div class="decorative-line"></div>
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
@@ -162,31 +188,25 @@
         document.addEventListener('DOMContentLoaded', function() {
             var inputs = document.querySelectorAll('.form-group input[type="number"]');
 
-            // Adjust input width based on content length
             inputs.forEach(function(input) {
                 input.addEventListener('input', function() {
-                    this.style.width = (this.value.length + 1) * 8 + 'px'; // Adjust width based on input length
+                    this.style.width = (this.value.length + 1) * 8 + 'px';
                 });
             });
 
-            // Calculate and display result on form submission
             document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission
+                event.preventDefault();
 
-                // Retrieve input values
                 var itemPrice = parseFloat(document.getElementById('item_price').value) || 0;
                 var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
                 var profit = parseFloat(document.getElementById('profit').value) || 0;
 
-                // Calculate new price including tax and profit
                 var taxAmount = (itemPrice * taxRate) / 100;
                 var newPrice = Math.round(itemPrice + taxAmount + profit);
 
-                // Display result
                 var resultElement = document.querySelector('#result .output-number');
                 resultElement.textContent = newPrice + " coins";
 
-                // Add result to history
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.textContent = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins";

@@ -96,14 +96,13 @@
             color: #D998A7;
             position: relative;
             text-align: center;
-            padding-top: 30px; /* Adjust for spacing above decorative text */
+            padding-top: 20px;
         }
         .history-box ul li::before {
             content: "";
             position: absolute;
-            top: 10px; /* Adjust for spacing above decorative line */
-            left: 50%;
-            transform: translateX(-50%);
+            top: 50%;
+            left: 10%;
             width: 80%;
             height: 2px;
             background-color: white;
@@ -111,7 +110,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 10px; /* Adjust for spacing above decorative text */
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -119,18 +118,18 @@
             z-index: 2;
             font-size: 14px;
             color: #D998A7;
-            border-radius: 10px; /* Adjusted to match the rounded style */
+            border-radius: 5px;
         }
         .decorative-line {
             height: 2px;
             background-color: white;
-            margin: 30px auto 20px; /* Adjust for equal spacing above and below */
+            margin: 30px auto 20px;
             width: 80%;
             color: #D998A7;
             position: relative;
             text-align: center;
             padding: 0 10px;
-            border-radius: 10px;
+            border-radius: 5px;
         }
         .decorative-line::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
@@ -142,7 +141,7 @@
             color: #D998A7;
             background-color: white;
             padding: 0 10px;
-            border-radius: 10px;
+            border-radius: 5px;
         }
         .screenshot-reminder {
             background-color: #FFE6F1;
@@ -155,12 +154,16 @@
             font-size: 16px;
             text-align: center;
         }
-        /* Adding extra margin to prevent overlap */
-        .history-box {
-            margin-bottom: 40px; /* Extra bottom margin to ensure no overlap */
+        /* Adjusting margins for the decorative elements under Previous Calculations */
+        .history-box .decorative-line {
+            margin: 30px auto;
         }
-        .history-box ul li {
-            margin-top: 40px; /* Extra top margin to ensure no overlap */
+        .history-box .decorative-line::before {
+            top: -10px;
+        }
+        .history-box .decorative-text {
+            margin-top: 30px;
+            border-radius: 10px; /* Ensure it matches the rounded style */
         }
     </style>
 </head>

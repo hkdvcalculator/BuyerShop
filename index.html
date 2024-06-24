@@ -96,13 +96,14 @@
             color: #D998A7;
             position: relative;
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px; /* Adjust for spacing above decorative text */
         }
         .history-box ul li::before {
             content: "";
             position: absolute;
-            top: 50%;
-            left: 10%;
+            top: 10px; /* Adjust for spacing above decorative line */
+            left: 50%;
+            transform: translateX(-50%);
             width: 80%;
             height: 2px;
             background-color: white;
@@ -110,7 +111,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 50%;
+            top: 10px; /* Adjust for spacing above decorative text */
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -118,18 +119,18 @@
             z-index: 2;
             font-size: 14px;
             color: #D998A7;
-            border-radius: 5px;
+            border-radius: 10px; /* Adjusted to match the rounded style */
         }
         .decorative-line {
             height: 2px;
             background-color: white;
-            margin: 30px auto 20px;
+            margin: 30px auto 20px; /* Adjust for equal spacing above and below */
             width: 80%;
             color: #D998A7;
             position: relative;
             text-align: center;
             padding: 0 10px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
         .decorative-line::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
@@ -141,7 +142,7 @@
             color: #D998A7;
             background-color: white;
             padding: 0 10px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
         .screenshot-reminder {
             background-color: #FFE6F1;
@@ -153,17 +154,6 @@
             width: 80%;
             font-size: 16px;
             text-align: center;
-        }
-        /* Adjusting margins for the decorative elements under Previous Calculations */
-        .history-box .decorative-line {
-            margin: 30px auto;
-        }
-        .history-box .decorative-line::before {
-            top: -10px;
-        }
-        .history-box .decorative-text {
-            margin-top: 30px;
-            border-radius: 10px; /* Ensure it matches the rounded style */
         }
     </style>
 </head>

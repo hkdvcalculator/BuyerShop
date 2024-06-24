@@ -144,65 +144,6 @@
             font-size: 16px;
             text-align: center;
         }
-
-        /* Dark Mode */
-        body.dark-mode {
-            background-color: #36393F;
-            color: #DCDDDE;
-        }
-        body.dark-mode .calculator {
-            background-color: #2F3136;
-            border-color: #DCDDDE;
-            color: #DCDDDE;
-        }
-        body.dark-mode #result {
-            background-color: #2F3136;
-            border-color: #DCDDDE;
-        }
-        body.dark-mode .history-box ul li::before,
-        body.dark-mode .decorative-line,
-        body.dark-mode .history-box {
-            background-color: #2F3136; /* Preserve dark mode for these elements */
-        }
-
-        /* Pink Mode */
-        body.pink-mode {
-            background-color: #FFE6F1;
-            color: #D998A7;
-        }
-        body.pink-mode .calculator {
-            background-color: #FFE6F1;
-            border-color: #D998A7;
-            color: #D998A7;
-        }
-        body.pink-mode #result {
-            background-color: #FFFFFF;
-            border-color: #D998A7;
-        }
-
-        /* Cute heart-shaped buttons */
-        .mode-button {
-            color: #D998A7;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px; /* Rounded for heart shape */
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            margin: 10px;
-        }
-        .mode-button:hover {
-            background-color: #FFC9E1;
-        }
-
-        .pink-mode-button {
-            background-color: #FFE6F1;
-        }
-
-        .dark-mode-button {
-            background-color: #36393F;
-            color: #DCDDDE;
-        }
     </style>
 </head>
 <body>
@@ -246,10 +187,6 @@
         </ul>
     </div>
 
-    <!-- Mode buttons -->
-    <button id="pinkModeButton" class="mode-button pink-mode-button">Pink Mode</button>
-    <button id="darkModeButton" class="mode-button dark-mode-button">Dark Mode</button>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var inputs = document.querySelectorAll('.form-group input[type="number"]');
@@ -277,18 +214,6 @@
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins" + '<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>';
                 historyList.appendChild(newHistoryItem);
-            });
-
-            // Toggle Dark Mode
-            document.getElementById('darkModeButton').addEventListener('click', function() {
-                document.body.classList.add('dark-mode');
-                document.body.classList.remove('pink-mode');
-            });
-
-            // Toggle Pink Mode
-            document.getElementById('pinkModeButton').addEventListener('click', function() {
-                document.body.classList.remove('dark-mode');
-                document.body.classList.add('pink-mode');
             });
         });
     </script>

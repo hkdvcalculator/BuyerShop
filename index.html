@@ -93,8 +93,27 @@
             text-align: left; /* Align text to the left within the box */
         }
         .history-box ul li {
-            margin-bottom: 5px; /* Add spacing between list items */
+            margin-bottom: 20px; /* Add more spacing between list items */
             color: #D998A7; /* Text color for list items */
+            position: relative; /* Position relative for the separator */
+        }
+        .history-box ul li::before {
+            content: "⋅˚₊‧𐙚‧₊˚ ⋅";
+            position: absolute;
+            top: -10px; /* Adjust position as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px; /* Adjust font size if necessary */
+            color: #D998A7;
+        }
+        .history-box ul li::after {
+            content: "";
+            display: block;
+            height: 2px; /* Semi thick line */
+            background-color: white;
+            margin: 10px 0; /* Adjust spacing above and below line */
+            width: 80%; /* Adjust width as needed */
+            margin-left: 10%; /* Center the line */
         }
     </style>
 </head>
@@ -166,7 +185,7 @@
                 // Add result to history
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.textContent = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " => New Price: " + newPrice + " coins";
+                newHistoryItem.textContent = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins";
                 historyList.appendChild(newHistoryItem);
             });
         });

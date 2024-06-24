@@ -99,25 +99,24 @@
             padding-top: 20px;
         }
         .history-box ul li::before {
-            content: "⋅˚₊‧𐙚‧₊˚ ⋅";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            color: #D998A7;
-            background-color: white;
-            padding: 0 10px;
-            border-radius: 10px;
-        }
-        .history-box ul li::after {
             content: "";
-            display: block;
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            width: 80%;
             height: 2px;
             background-color: white;
-            margin: 10px 0;
-            width: 80%;
-            margin-left: 10%;
+            z-index: 1;
+        }
+        .history-box ul li span.decorative-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FFE6F1;
+            padding: 0 10px;
+            z-index: 2;
+            font-size: 14px;
         }
         .history-box .decorative-line {
             height: 2px;
@@ -207,7 +206,7 @@
 
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.textContent = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins";
+                newHistoryItem.innerHTML = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins" + '<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>';
                 historyList.appendChild(newHistoryItem);
             });
         });

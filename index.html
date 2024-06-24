@@ -20,6 +20,8 @@
             border-radius: 10px;
             width: 320px;
             box-sizing: border-box;
+            background-color: #FFE6F1; /* Default calculator background color */
+            color: #D998A7; /* Default calculator font color */
         }
         .form-group {
             margin-bottom: 20px;
@@ -65,14 +67,14 @@
             padding: 10px;
             border: 1px solid #D998A7;
             border-radius: 5px;
+            color: #D998A7; /* Result font color */
         }
         #result p {
             margin: 5px 0;
             font-weight: bold;
-            color: #D998A7;
         }
         #result .output-number {
-            color: #D998A7;
+            color: #D998A7; /* Result number font color */
         }
         .info-box, .history-box {
             background-color: #FFE6F1;
@@ -149,17 +151,14 @@
             background-color: #1e1e1e;
             color: #B0B3B8; /* Font color for dark mode */
         }
-        body.dark-mode .calculator,
-        body.dark-mode .info-box,
-        body.dark-mode .history-box,
-        body.dark-mode .screenshot-reminder {
+        body.dark-mode .calculator {
             background-color: #3c3c3c;
             border-color: #B0B3B8;
             color: #B0B3B8; /* Font color for dark mode */
         }
-        body.dark-mode .history-box ul li,
-        body.dark-mode .screenshot-reminder {
-            color: #B0B3B8; /* Font color for dark mode */
+        body.dark-mode #result {
+            background-color: #3c3c3c;
+            border-color: #B0B3B8;
         }
 
         /* Black & White Mode */
@@ -167,17 +166,14 @@
             background-color: #FFFFFF;
             color: #000000; /* Font color for black & white mode */
         }
-        body.bw-mode .calculator,
-        body.bw-mode .info-box,
-        body.bw-mode .history-box,
-        body.bw-mode .screenshot-reminder {
+        body.bw-mode .calculator {
             background-color: #FFFFFF;
             border-color: #000000;
             color: #000000; /* Font color for black & white mode */
         }
-        body.bw-mode .history-box ul li,
-        body.bw-mode .screenshot-reminder {
-            color: #000000; /* Font color for black & white mode */
+        body.bw-mode #result {
+            background-color: #FFFFFF;
+            border-color: #000000;
         }
 
         /* Cute heart-shaped buttons */

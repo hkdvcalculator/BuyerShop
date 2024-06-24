@@ -93,14 +93,15 @@
             text-align: left; /* Align text to the left within the box */
         }
         .history-box ul li {
-            margin-bottom: 20px; /* Add more spacing between list items */
+            margin-bottom: 40px; /* Add more spacing between list items */
             color: #D998A7; /* Text color for list items */
             position: relative; /* Position relative for the separator */
+            padding-top: 20px; /* Add padding at the top to avoid overlap with decorative text */
         }
         .history-box ul li::before {
             content: "⋅˚₊‧𐙚‧₊˚ ⋅";
             position: absolute;
-            top: -12px; /* Adjust position as needed */
+            top: -10px; /* Adjust position as needed */
             left: 50%;
             transform: translateX(-50%);
             font-size: 14px; /* Adjust font size if necessary */

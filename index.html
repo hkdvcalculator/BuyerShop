@@ -74,7 +74,7 @@
         #result .output-number {
             color: #D998A7; /* Text color for output number */
         }
-        .info-box {
+        .info-box, .history-box {
             background-color: #FFE6F1;
             color: #D998A7;
             border: 2px solid #D998A7;
@@ -86,10 +86,20 @@
             text-align: center;
             font-weight: bold;
         }
+        .history-box ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* Remove default padding */
+            margin: 10px 0 0; /* Adjust margin for spacing */
+            text-align: left; /* Align text to the left within the box */
+        }
+        .history-box ul li {
+            margin-bottom: 5px; /* Add spacing between list items */
+            color: #D998A7; /* Text color for list items */
+        }
     </style>
 </head>
 <body>
-    <h1>HKDV Tax Calculator</h1>
+    <h1>Buyer Shop Calculator</h1>
     <div class="info-box">
         This calculator can be used for smile market, buyer/select shop, etc.
     </div>
@@ -116,6 +126,13 @@
             <p class="output-text">New price including tax and profit:</p>
             <p class="output-number"></p>
         </div>
+    </div>
+
+    <div class="history-box">
+        Previous Calculations:
+        <ul id="historyList">
+            <!-- List of previous results will appear here -->
+        </ul>
     </div>
 
     <script>
@@ -145,6 +162,12 @@
                 // Display result
                 var resultElement = document.querySelector('#result .output-number');
                 resultElement.textContent = newPrice + " coins";
+
+                // Add result to history
+                var historyList = document.getElementById('historyList');
+                var newHistoryItem = document.createElement('li');
+                newHistoryItem.textContent = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " => New Price: " + newPrice + " coins";
+                historyList.appendChild(newHistoryItem);
             });
         });
     </script>

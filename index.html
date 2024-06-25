@@ -70,23 +70,31 @@
             margin: 5px 0;
             font-weight: bold;
             color: #D998A7;
+            text-decoration: none; /* Remove underline */
         }
         #result .output-text {
             color: #D998A7;
-            background-color: #FFE6F1;
             font-weight: bold;
+            /* Removed background highlight */
         }
         #result .output-number {
             color: #D998A7;
-            background-color: #FFE6F1;
+            background-color: #FFE6F1; /* Keep highlight for output */
             font-weight: bold;
             padding: 5px;
             display: block;
             margin: auto;
+            text-decoration: none; /* Remove underline */
         }
         #result .output-total {
             color: #D998A7;
-            text-decoration: underline;
+            text-decoration: none; /* Remove underline */
+        }
+        /* Keep highlight for output-total */
+        #result .output-total span {
+            background-color: #FFE6F1;
+            font-weight: bold;
+            padding: 5px;
         }
         .info-box, .history-box {
             background-color: #FFE6F1;
@@ -224,10 +232,10 @@
                 var totalPrice = Math.round((itemPrice + profit) / (1 - taxRateDecimal));
 
                 // Display result for new price including tax and profit
-                document.querySelector('#result .output-number').textContent = Math.round(totalPrice) + " coins";
+                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
                 // Calculate total coins received after accounting for tax
-                var totalCoinsReceived = Math.round(totalPrice * (1 - taxRateDecimal));
+                var totalCoinsReceived = Math.round((itemPrice - (itemPrice * taxRateDecimal) + profit));
 
                 // Display result for total coins that will appear in your gift box
                 var totalCoinsDisplay = totalCoinsReceived + " coins";
@@ -236,7 +244,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${Math.round(totalPrice)} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

@@ -71,6 +71,11 @@
             font-weight: bold;
             color: #D998A7;
         }
+        #result .output-text {
+            color: #D998A7;
+            background-color: #FFE6F1;
+            font-weight: bold;
+        }
         #result .output-number {
             color: #D998A7;
         }
@@ -177,7 +182,7 @@
         <div id="result">
             <p class="output-text">New price including tax and profit:</p>
             <p class="output-number"></p>
-            <p class="output-total">Total coins you will receive: <span id="total-coins"></span></p>
+            <p class="output-total">Total coins that will appear in your gift box: <span id="total-coins"></span></p>
         </div>
     </div>
 
@@ -209,17 +214,20 @@
                 var taxRate = parseFloat(document.getElementById('tax_rate').value);
                 var profit = parseFloat(document.getElementById('profit').value);
 
-                // Perform calculation
+                // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;
                 var totalPrice = Math.round(itemPrice * (1 + taxRateDecimal) + profit);
-                var totalCoins = Math.round(itemPrice - (itemPrice * taxRateDecimal));
 
-                // Display result
-                document.getElementById('result').innerHTML = `
-                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold;">New price including tax and profit: ${totalPrice} coins</p>
-                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold; text-decoration: underline;">Total coins you will receive: <span id="total-coins">${totalCoins}</span> coins</p>
-                `;
+                // Display result for new price including tax and profit
+                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
+                // Calculate total coins received after accounting for tax
+                var totalCoinsReceived = Math.round(itemPrice - (itemPrice * taxRateDecimal) + profit);
+
+                // Display result for total coins that will appear in your gift box
+                document.getElementById('total-coins').textContent = totalCoinsReceived + " coins";
+
+                // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;

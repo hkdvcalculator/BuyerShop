@@ -73,6 +73,8 @@
         }
         #result .output-number {
             color: #D998A7;
+            background-color: #FFE6F1;
+            font-weight: bold;
         }
         #result .output-total {
             color: #D998A7;
@@ -216,8 +218,9 @@
 
                 // Display result
                 document.getElementById('result').innerHTML = `
-                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold;">New price including tax and profit: ${totalPrice} coins</p>
-                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold; text-decoration: underline;">Total coins you will receive: ${totalCoins} coins</p>
+                    <p class="output-text">New price including tax and profit:</p>
+                    <p class="output-number">${totalPrice} coins</p>
+                    <p class="output-total">Total coins you will receive: <span style="color: #FFC9E1; text-decoration: underline;">${totalCoins} coins</span></p>
                 `;
 
                 var historyList = document.getElementById('historyList');

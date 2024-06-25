@@ -3,10 +3,10 @@ def calculate_total_price(item_price, tax_rate, profit):
     tax_rate_decimal = tax_rate / 100
 
     # Calculate total price including desired profit and accounting for tax
-    total_price = int((item_price + profit) / (1 - tax_rate_decimal))
+    total_price = round((item_price + profit) / (1 - tax_rate_decimal))
 
     # Calculate total coins received after accounting for tax
-    total_coins_received = int(total_price - (total_price * tax_rate_decimal))
+    total_coins_received = total_price - (total_price * tax_rate_decimal)
 
     return total_price, total_coins_received
 

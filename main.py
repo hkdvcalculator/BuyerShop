@@ -2,11 +2,11 @@ def calculate_total_price(item_price, tax_rate, profit):
     # Convert tax rate from percentage to decimal
     tax_rate_decimal = tax_rate / 100
 
-    # Calculate total price including tax and profit
-    total_price = round(item_price * (1 + tax_rate_decimal) + profit)
+    # Calculate total price including desired profit and accounting for tax
+    total_price = round((item_price + profit) / (1 - tax_rate_decimal))
 
-    # Calculate total coins received after tax
-    total_coins_received = round(item_price - (item_price * tax_rate_decimal))
+    # Calculate total coins received after accounting for tax
+    total_coins_received = round(total_price * (1 - tax_rate_decimal))
 
     return total_price, total_coins_received
 

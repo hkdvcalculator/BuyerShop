@@ -236,7 +236,7 @@
                 document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
                 // Calculate total coins received after accounting for tax based on the new price
-                var totalCoinsReceived = Math.round((totalPrice / (1 + taxRateDecimal)) + profit);
+                var totalCoinsReceived = Math.round(totalPrice - (totalPrice * taxRateDecimal) + profit);
 
                 // Display result for total coins that will appear in your gift box
                 var totalCoinsDisplay = totalCoinsReceived + " coins";

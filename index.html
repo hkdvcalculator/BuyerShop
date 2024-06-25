@@ -86,6 +86,16 @@
             margin: auto;
             text-decoration: none; /* Remove underline */
         }
+        #result .output-total {
+            color: #D998A7;
+            text-decoration: none; /* Remove underline */
+        }
+        /* Keep highlight for output-total */
+        #result .output-total span {
+            background-color: #FFE6F1;
+            font-weight: bold;
+            padding: 5px;
+        }
         .info-box, .history-box {
             background-color: #FFE6F1;
             color: #D998A7;
@@ -235,7 +245,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

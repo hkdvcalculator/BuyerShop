@@ -74,6 +74,10 @@
         #result .output-number {
             color: #D998A7;
         }
+        #result .output-total {
+            color: #D998A7;
+            text-decoration: underline;
+        }
         .info-box, .history-box {
             background-color: #FFE6F1;
             color: #D998A7;
@@ -173,6 +177,7 @@
         <div id="result">
             <p class="output-text">New price including tax and profit:</p>
             <p class="output-number"></p>
+            <p class="output-total">Total coins you will receive: <span id="total-coins"></span></p>
         </div>
     </div>
 
@@ -200,19 +205,24 @@
             document.getElementById('calculatorForm').addEventListener('submit', function(event) {
                 event.preventDefault();
 
-                var itemPrice = parseFloat(document.getElementById('item_price').value) || 0;
-                var taxRate = parseFloat(document.getElementById('tax_rate').value) || 0;
-                var profit = parseFloat(document.getElementById('profit').value) || 0;
+                var itemPrice = parseFloat(document.getElementById('item_price').value);
+                var taxRate = parseFloat(document.getElementById('tax_rate').value);
+                var profit = parseFloat(document.getElementById('profit').value);
 
-                var taxAmount = (itemPrice * taxRate) / 100;
-                var newPrice = Math.round(itemPrice + taxAmount + profit);
+                // Perform calculation
+                var taxRateDecimal = taxRate / 100;
+                var totalPrice = Math.round(itemPrice * (1 + taxRateDecimal) + profit);
+                var totalCoins = Math.round(itemPrice - (itemPrice * taxRateDecimal));
 
-                var resultElement = document.querySelector('#result .output-number');
-                resultElement.textContent = newPrice + " coins";
+                // Display result
+                document.getElementById('result').innerHTML = `
+                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold;">New price including tax and profit: ${totalPrice} coins</p>
+                    <p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold; text-decoration: underline;">Total coins you will receive: ${totalCoins} coins</p>
+                `;
 
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = "Price: " + itemPrice + ", Tax Rate: " + taxRate + "%, Profit: " + profit + " ⟶ New Price: " + newPrice + " coins" + '<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>';
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

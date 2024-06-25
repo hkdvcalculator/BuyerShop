@@ -86,16 +86,6 @@
             margin: auto;
             text-decoration: none; /* Remove underline */
         }
-        #result .output-total {
-            color: #D998A7;
-            text-decoration: none; /* Remove underline */
-        }
-        /* Keep highlight for output-total */
-        #result .output-total span {
-            background-color: #FFE6F1;
-            font-weight: bold;
-            padding: 5px;
-        }
         .info-box, .history-box {
             background-color: #FFE6F1;
             color: #D998A7;
@@ -195,8 +185,8 @@
         <div id="result">
             <p class="output-text">New price including tax and profit:</p>
             <p class="output-number"></p>
-            <p class="output-text">Total coins that will appear in your gift box:</p> <!-- Changed from output-total to output-text -->
-            <p class="output-number" id="total-coins"></p> <!-- Added an ID for easier targeting -->
+            <p class="output-text">Total coins that will appear in your gift box based on the NEW item price:</p>
+            <p class="output-number" id="total-coins"></p>
         </div>
     </div>
 
@@ -235,8 +225,8 @@
                 // Display result for new price including tax and profit
                 document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
-                // Calculate total coins received after accounting for tax
-                var totalCoinsReceived = Math.round((itemPrice - (itemPrice * taxRateDecimal) + profit));
+                // Calculate total coins received after accounting for tax based on the new price
+                var totalCoinsReceived = Math.round((totalPrice / (1 + taxRateDecimal)) + profit);
 
                 // Display result for total coins that will appear in your gift box
                 var totalCoinsDisplay = totalCoinsReceived + " coins";

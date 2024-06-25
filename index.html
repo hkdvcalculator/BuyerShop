@@ -221,13 +221,13 @@
 
                 // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;
-                var totalPrice = Math.round(itemPrice * (1 + taxRateDecimal) + profit);
+                var totalPrice = Math.round((itemPrice + profit) / (1 - taxRateDecimal));
 
                 // Display result for new price including tax and profit
-                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
+                document.querySelector('#result .output-number').textContent = Math.round(totalPrice) + " coins";
 
                 // Calculate total coins received after accounting for tax
-                var totalCoinsReceived = Math.round(itemPrice - (itemPrice * taxRateDecimal) + profit);
+                var totalCoinsReceived = Math.round(totalPrice * (1 - taxRateDecimal));
 
                 // Display result for total coins that will appear in your gift box
                 var totalCoinsDisplay = totalCoinsReceived + " coins";
@@ -236,7 +236,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${Math.round(totalPrice)} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

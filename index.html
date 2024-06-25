@@ -36,7 +36,7 @@
             font-size: 16px;
             border: 1px solid #D998A7;
             border-radius: 5px;
-            width: 80%; /* Adjusted width */
+            width: 80%;
             text-align: center;
             color: #D998A7;
             transition: border-color 0.3s, width 0.3s;
@@ -70,31 +70,20 @@
             margin: 5px 0;
             font-weight: bold;
             color: #D998A7;
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
         }
         #result .output-text {
             color: #D998A7;
             font-weight: bold;
-            /* Removed background highlight */
         }
         #result .output-number {
             color: #D998A7;
-            background-color: #FFE6F1; /* Keep highlight for output */
+            background-color: #FFE6F1;
             font-weight: bold;
             padding: 5px;
             display: block;
             margin: auto;
-            text-decoration: none; /* Remove underline */
-        }
-        #result .output-total {
-            color: #D998A7;
-            text-decoration: none; /* Remove underline */
-        }
-        /* Keep highlight for output-total */
-        #result .output-total span {
-            background-color: #FFE6F1;
-            font-weight: bold;
-            padding: 5px;
+            text-decoration: none;
         }
         .info-box, .history-box {
             background-color: #FFE6F1;
@@ -118,13 +107,13 @@
             color: #D998A7;
             position: relative;
             text-align: center;
-            padding-top: 30px; /* Adjust for spacing above decorative text */
-            font-size: 16px; /* Font size for the history list items */
+            padding-top: 30px;
+            font-size: 16px;
         }
         .history-box ul li::before {
             content: "";
             position: absolute;
-            top: 10px; /* Adjust for spacing above decorative line */
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
@@ -134,7 +123,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 10px; /* Adjust for spacing above decorative text */
+            top: 10px;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -142,12 +131,12 @@
             z-index: 2;
             font-size: 14px;
             color: #D998A7;
-            border-radius: 10px; /* Adjusted to match the rounded style */
+            border-radius: 10px;
         }
         .decorative-line {
             height: 2px;
             background-color: white;
-            margin: 30px auto 20px; /* Adjust for equal spacing above and below */
+            margin: 30px auto 20px;
             width: 80%;
             color: #D998A7;
             position: relative;
@@ -236,7 +225,7 @@
                 document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
                 // Calculate total coins received after accounting for tax based on the new price
-                var totalCoinsReceived = Math.round(totalPrice - (totalPrice * taxRateDecimal) + profit);
+                var totalCoinsReceived = Math.round(totalPrice - (totalPrice * taxRateDecimal));
 
                 // Display result for total coins that will appear in your gift box
                 var totalCoinsDisplay = totalCoinsReceived + " coins";

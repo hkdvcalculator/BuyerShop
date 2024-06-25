@@ -1,14 +1,10 @@
-document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    var inputs = document.querySelectorAll('.form-group input[type="number"]');
 
-    var itemPrice = parseFloat(document.getElementById('item_price').value);
-    var taxRate = parseFloat(document.getElementById('tax_rate').value);
-    var profit = parseFloat(document.getElementById('profit').value);
+    inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            this.style.width = (this.value.length + 1) * 8 + 'px';
+        });
+    });
 
-    // Perform calculation
-    var taxRateDecimal = taxRate / 100;
-    var totalPrice = Math.round(itemPrice * (1 + taxRateDecimal) + profit);
-
-    // Display result
-    document.getElementById('result').innerHTML = `<p style="color:#D998A7; background-color:#FFE6F1; font-weight:bold;">New price including tax and profit: ${totalPrice} coins</p>`;
-});
+    document.getElementById('calculatorForm').addEventListener('submit

@@ -78,6 +78,11 @@
         }
         #result .output-number {
             color: #D998A7;
+            background-color: #FFE6F1;
+            font-weight: bold;
+            padding: 5px;
+            display: block;
+            margin: auto;
         }
         #result .output-total {
             color: #D998A7;
@@ -225,7 +230,8 @@
                 var totalCoinsReceived = Math.round(itemPrice - (itemPrice * taxRateDecimal) + profit);
 
                 // Display result for total coins that will appear in your gift box
-                document.getElementById('total-coins').textContent = totalCoinsReceived + " coins";
+                var totalCoinsDisplay = totalCoinsReceived + " coins";
+                document.getElementById('total-coins').textContent = totalCoinsDisplay;
 
                 // Update history list
                 var historyList = document.getElementById('historyList');

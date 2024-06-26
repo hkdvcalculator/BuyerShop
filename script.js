@@ -16,23 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var taxRateDecimal = taxRate / 100;
 
-        // Perform calculation for new price including tax and profit
-        var totalPrice = Math.ceil((itemPrice + profit) / (1 - taxRateDecimal));
+        // Calculate total coins to be received
+        var totalCoinsReceived = itemPrice + profit;
+
+        // Calculate the new selling price that includes the tax
+        var newSellingPrice = Math.ceil(totalCoinsReceived / (1 - taxRateDecimal));
 
         // Display result for new price including tax and profit
-        document.querySelector('#result .output-number').textContent = totalPrice + " coins";
+        document.getElementById('new-selling-price').textContent = newSellingPrice + " coins";
 
-        // Calculate total coins received after accounting for tax based on the new price
-        var totalCoinsReceived = Math.round(totalPrice * (1 - taxRateDecimal));
+        // Calculate the total coins received after accounting for tax
+        var totalCoinsAfterTax = Math.floor(newSellingPrice * (1 - taxRateDecimal));
 
         // Display result for total coins that will appear in your gift box
-        var totalCoinsDisplay = totalCoinsReceived + " coins";
-        document.getElementById('total-coins').textContent = totalCoinsDisplay;
-
-        // Update history list
-        var historyList = document.getElementById('historyList');
-        var newHistoryItem = document.createElement('li');
-        newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
-        historyList.appendChild(newHistoryItem);
-    });
-});
+        document.getElementById('total-coins').

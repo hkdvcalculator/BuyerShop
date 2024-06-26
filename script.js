@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display result for total coins that will appear in your gift box
         document.getElementById('total-coins').textContent = totalCoinsAfterTax + " coins";
 
-        // Update history list
+        // Update history list with the specified formatting
         var historyList = document.getElementById('historyList');
         var newHistoryItem = document.createElement('li');
         newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${newSellingPrice} coins, Gift Box Coins: ${totalCoinsAfterTax} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;

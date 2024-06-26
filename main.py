@@ -6,7 +6,7 @@ def calculate_total_price(item_price, tax_rate, profit):
     total_coins_received = item_price + profit
 
     # Calculate the new selling price that includes the tax
-    total_price = (total_coins_received / (1 - tax_rate_decimal))
+    total_price = total_coins_received / (1 - tax_rate_decimal)
 
     # Round total_price to the nearest integer
     total_price = round(total_price)

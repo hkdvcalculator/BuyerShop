@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Perform calculation for new price including tax and profit
         var taxRateDecimal = taxRate / 100;
-        var totalPrice = Math.ceil((itemPrice + profit) / (1 - taxRateDecimal));
+        var totalPrice = Math.round((itemPrice + profit) / (1 - taxRateDecimal));
 
         // Display result for new price including tax and profit
         document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
         // Calculate total coins received after accounting for tax based on the new price
-        var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
+        var totalCoinsReceived = Math.round(totalPrice * (1 - taxRateDecimal));
 
         // Display result for total coins that will appear in your gift box
         var totalCoinsDisplay = totalCoinsReceived + " coins";

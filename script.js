@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var taxRate = parseFloat(document.getElementById('tax_rate').value);
         var profit = parseFloat(document.getElementById('profit').value);
 
-        // Perform calculation for new price including tax and profit
         var taxRateDecimal = taxRate / 100;
-        var totalPrice = Math.round((itemPrice + profit) / (1 - taxRateDecimal));
+
+        // Perform calculation for new price including tax and profit
+        var totalPrice = Math.ceil((itemPrice + profit) / (1 - taxRateDecimal));
 
         // Display result for new price including tax and profit
         document.querySelector('#result .output-number').textContent = totalPrice + " coins";

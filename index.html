@@ -192,7 +192,7 @@
         </form>
         <div id="result">
             <p class="output-text">New selling price including tax and profit:</p>
-            <p class="output-number" id="new-selling-price"></p>
+            <p class="output-number"></p>
             <p class="output-text">Total coins that will appear in your gift box based on the NEW selling price:</p>
             <p class="output-number" id="total-coins"></p>
         </div>
@@ -226,39 +226,25 @@
                 var taxRate = parseFloat(document.getElementById('tax_rate').value);
                 var profit = parseFloat(document.getElementById('profit').value);
 
-                // Convert tax rate from percentage to decimal
+                // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;
+                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
 
-                // Calculate total coins received before tax
-                var totalCoinsReceived = itemPrice + profit;
+                // Display result for new price including tax and profit
+                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
-                // Calculate total price including tax
-                var totalPrice = totalCoinsReceived / (1 - taxRateDecimal);
-
-                // Round total price to the nearest integer
-                var roundedTotalPrice = Math.round(totalPrice);
-
-                // Calculate total coins received after tax based on the rounded total price
-                var totalCoinsReceivedAfterTax = Math.round(roundedTotalPrice * (1 - taxRateDecimal));
-
-                // Display result for new selling price including tax and profit
-                document.getElementById('new-selling-price').textContent = roundedTotalPrice + " coins";
+                // Calculate total coins received after accounting for tax based on the new price
+                var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
 
                 // Display result for total coins that will appear in your gift box
-                document.getElementById('total-coins').textContent = totalCoinsReceivedAfterTax + " coins";
+                var totalCoinsDisplay = totalCoinsReceived + " coins";
+                document.getElementById('total-coins').textContent = totalCoinsDisplay;
 
-                // Add the result to the history list
+                // Update history list
                 var historyList = document.getElementById('historyList');
-                var listItem = document.createElement('li');
-                var currentDate = new Date();
-                var timestamp = currentDate.toLocaleString();
-
-                listItem.innerHTML = `<span class="decorative-text">${timestamp}</span><br>${roundedTotalPrice} coins (selling price), ${totalCoinsReceivedAfterTax} coins (gift box total)`;
-
-                historyList.appendChild(listItem);
-
-                // Clear form inputs after calculation
-                document.getElementById('calculatorForm').reset();
+                var newHistoryItem = document.createElement('li');
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                historyList.appendChild(newHistoryItem);
             });
         });
     </script>

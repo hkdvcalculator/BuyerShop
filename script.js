@@ -14,27 +14,25 @@ document.addEventListener('DOMContentLoaded', function() {
         var taxRate = parseFloat(document.getElementById('tax_rate').value);
         var profit = parseFloat(document.getElementById('profit').value);
 
+        // Perform calculation for new price including tax and profit
         var taxRateDecimal = taxRate / 100;
-
-        // Calculate total coins to be received
         var totalCoinsReceived = itemPrice + profit;
-
-        // Calculate the new selling price that includes the tax
-        var newSellingPrice = Math.ceil(totalCoinsReceived / (1 - taxRateDecimal));
+        var totalPrice = Math.round(totalCoinsReceived / (1 - taxRateDecimal));
 
         // Display result for new price including tax and profit
-        document.getElementById('new-selling-price').textContent = newSellingPrice + " coins";
+        document.querySelector('#result .output-number').textContent = totalPrice + " coins";
 
-        // Calculate the total coins received after accounting for tax
-        var totalCoinsAfterTax = Math.floor(newSellingPrice * (1 - taxRateDecimal));
+        // Calculate total coins received after accounting for tax based on the new price
+        var totalCoinsReceivedAfterTax = Math.round(totalPrice * (1 - taxRateDecimal));
 
         // Display result for total coins that will appear in your gift box
-        document.getElementById('total-coins').textContent = totalCoinsAfterTax + " coins";
+        var totalCoinsDisplay = totalCoinsReceivedAfterTax + " coins";
+        document.getElementById('total-coins').textContent = totalCoinsDisplay;
 
-        // Update history list with the specified formatting
+        // Update history list
         var historyList = document.getElementById('historyList');
         var newHistoryItem = document.createElement('li');
-        newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${newSellingPrice} coins, Gift Box Coins: ${totalCoinsAfterTax} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+        newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceivedAfterTax} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
         historyList.appendChild(newHistoryItem);
     });
 });

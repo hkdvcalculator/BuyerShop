@@ -9,12 +9,12 @@ def calculate_total_price(item_price, tax_rate, profit):
     total_price = total_coins_received / (1 - tax_rate_decimal)
 
     # Round total_price to the nearest integer
-    total_price = round(total_price)
+    total_price_rounded = round(total_price)
 
-    # Calculate total coins received after accounting for tax based on the new selling price
-    total_coins_received_after_tax = round(total_price * (1 - tax_rate_decimal))
+    # Calculate total coins received after accounting for tax based on the rounded new selling price
+    total_coins_received_after_tax = round(total_price_rounded * (1 - tax_rate_decimal))
 
-    return total_price, total_coins_received_after_tax
+    return total_price_rounded, total_coins_received_after_tax
 
 # Example usage
 if __name__ == "__main__":

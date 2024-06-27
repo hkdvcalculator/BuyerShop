@@ -189,12 +189,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .highlight {
-            background-color: white;
-            color: #D998A7;
-            padding: 2px 5px;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
@@ -242,10 +236,12 @@
         Previous Calculations:
         <div class="decorative-line"></div>
         <div class="screenshot-reminder">
-            Be sure to screenshot your previous calculations!
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
         </div>
-        <ul id="historyList"></ul>
-        <img src="COINS.png" alt="Coins">
+        <ul id="historyList">
+            <!-- List of previous results will appear here -->
+        </ul>
+        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
     </div>
 
     <script>
@@ -285,7 +281,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `<strong><span class="highlight">${itemName}</span></strong><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `<strong>${itemName}</strong><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

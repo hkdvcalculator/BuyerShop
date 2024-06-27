@@ -33,9 +33,5 @@ document.addEventListener('DOMContentLoaded', function() {
         var newHistoryItem = document.createElement('li');
         newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
         historyList.appendChild(newHistoryItem);
-
-        // Display the image
-        var historyImage = document.getElementById('historyImage');
-        historyImage.style.display = 'block';
     });
 });

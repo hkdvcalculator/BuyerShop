@@ -193,19 +193,17 @@
             justify-content: center;
             margin-top: 10px;
             margin-bottom: 10px;
-            flex-wrap: wrap;
         }
         .label-container input[type="text"] {
             padding: 8px;
             font-size: 16px;
             border: 1px solid #D998A7;
             border-radius: 5px;
-            max-width: 70%;
+            width: 70%;
             text-align: center;
             color: #D998A7;
             transition: border-color 0.3s, width 0.3s;
             margin-right: 10px;
-            flex: 1 1 auto;
         }
         .label-container input[type="text"]:focus {
             outline: none;
@@ -220,7 +218,6 @@
             border-radius: 5px;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            flex: 0 0 auto;
         }
         .label-container input[type="button"]:hover {
             background-color: #FFC9E1;
@@ -325,17 +322,6 @@
                 labelButton.type = 'button';
                 labelButton.value = 'OK';
                 labelButton.className = 'label-button';
-
-                labelInput.addEventListener('input', function() {
-                    this.style.width = 'auto';
-                    this.style.height = 'auto';
-                    if (this.scrollWidth > this.clientWidth) {
-                        this.style.width = Math.min(this.scrollWidth, labelContainer.clientWidth - labelButton.clientWidth - 20) + 'px';
-                    }
-                    if (this.scrollHeight > this.clientHeight) {
-                        this.style.height = this.scrollHeight + 'px';
-                    }
-                });
 
                 labelButton.addEventListener('click', function() {
                     var labelText = labelInput.value.trim();

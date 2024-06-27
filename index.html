@@ -187,6 +187,40 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .label-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .label-container input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #D998A7;
+            border-radius: 5px;
+            width: 70%;
+            text-align: center;
+            color: #D998A7;
+            transition: border-color 0.3s, width 0.3s;
+            margin-right: 10px;
+        }
+        .label-container input[type="text"]:focus {
+            outline: none;
+            border-color: #FFC9E1;
+        }
+        .label-container input[type="button"] {
+            background-color: #FFE6F1;
+            color: #D998A7;
+            cursor: pointer;
+            border: 1px solid #D998A7;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .label-container input[type="button"]:hover {
+            background-color: #FFC9E1;
+        }
     </style>
 </head>
 <body>
@@ -274,6 +308,35 @@
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                
+                // Create label input and button
+                var labelContainer = document.createElement('div');
+                labelContainer.className = 'label-container';
+
+                var labelInput = document.createElement('input');
+                labelInput.type = 'text';
+                labelInput.placeholder = 'Type item name here';
+                labelInput.className = 'label-input';
+
+                var labelButton = document.createElement('input');
+                labelButton.type = 'button';
+                labelButton.value = 'OK';
+                labelButton.className = 'label-button';
+
+                labelButton.addEventListener('click', function() {
+                    var labelText = labelInput.value.trim();
+                    if (labelText) {
+                        var labelSpan = document.createElement('span');
+                        labelSpan.textContent = labelText;
+                        newHistoryItem.insertBefore(labelSpan, newHistoryItem.firstChild);
+                        labelContainer.style.display = 'none';
+                    }
+                });
+
+                labelContainer.appendChild(labelInput);
+                labelContainer.appendChild(labelButton);
+                newHistoryItem.appendChild(labelContainer);
+
                 historyList.appendChild(newHistoryItem);
             });
         });

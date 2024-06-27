@@ -162,10 +162,26 @@
             margin-top: 5px;
             margin-bottom: 10px;
         }
+        .calculator-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px; /* Adjust the font size as needed */
+            margin-bottom: 20px;
+        }
+        .calculator-title img {
+            margin: 0 10px; /* Adjust margin as needed */
+            width: 24px; /* Adjust width as needed */
+            height: 24px; /* Adjust height as needed */
+        }
     </style>
 </head>
 <body>
-    <h1>HKDV Tax Calculator</h1>
+    <div class="calculator-title">
+        <img src="COINS.png" alt="Coins Image">
+        <h1>HKDV Tax Calculator</h1>
+        <img src="COINS.png" alt="Coins Image">
+    </div>
     <div class="info-box">
         This calculator can be used for smile market, buyer/select shop, etc. It helps you calculate the break-even price, accounting for taxes and desired coin profits.
     </div>
@@ -225,7 +241,7 @@
 
                 var itemPrice = parseFloat(document.getElementById('item_price').value);
                 var taxRate = parseFloat(document.getElementById('tax_rate').value);
-                var profit = parseFloat(document.getElementById('profit').value);
+                var profit = parseFloat(document.getElementById('profit').                var profit = parseFloat(document.getElementById('profit').value);
 
                 // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;

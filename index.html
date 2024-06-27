@@ -192,6 +192,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
         .label-container input[type="text"] {
             padding: 8px;
@@ -307,8 +308,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
-                
+
                 // Create label input and button
                 var labelContainer = document.createElement('div');
                 labelContainer.className = 'label-container';
@@ -326,10 +326,7 @@
                 labelButton.addEventListener('click', function() {
                     var labelText = labelInput.value.trim();
                     if (labelText) {
-                        var labelSpan = document.createElement('span');
-                        labelSpan.textContent = labelText;
-                        newHistoryItem.insertBefore(labelSpan, newHistoryItem.firstChild);
-                        labelContainer.style.display = 'none';
+                        labelInput.value = labelText; // Ensure the input box retains the label
                     }
                 });
 
@@ -337,6 +334,7 @@
                 labelContainer.appendChild(labelButton);
                 newHistoryItem.appendChild(labelContainer);
 
+                newHistoryItem.innerHTML += `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

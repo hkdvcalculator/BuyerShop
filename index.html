@@ -187,43 +187,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .input-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            position: relative;
-            border: 1px solid #D998A7;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        .input-container input[type="text"] {
-            padding: 8px;
-            font-size: 16px;
-            border: none;
-            text-align: center;
-            color: #D998A7;
-            transition: border-color 0.3s, width 0.3s;
-            width: calc(100% - 50px);
-        }
-        .input-container input[type="text"]:focus {
-            outline: none;
-        }
-        .input-container input[type="button"] {
-            background-color: #FFE6F1;
-            color: #D998A7;
-            cursor: pointer;
-            border: none;
-            padding: 8px;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            position: absolute;
-            right: 0;
-        }
-        .input-container input[type="button"]:hover {
-            background-color: #FFC9E1;
-        }
     </style>
 </head>
 <body>
@@ -256,40 +219,63 @@
 
             <input type="submit" value="Calculate">
         </form>
-
-        <div id="result" style="display:none;">
-            <p class="output-text">You need to list your item for at least</p>
-            <p class="output-number" id="break_even_price"></p>
-            <p class="output-text">coins to cover the tax and make your desired profit.</p>
+        <div id="result">
+            <p class="output-text">New selling price including tax and profit:</p>
+            <p class="output-number"></p>
+            <p class="output-text">Total coins that will appear in your gift box based on the NEW selling price:</p>
+            <p class="output-number" id="total-coins"></p>
         </div>
     </div>
 
     <div class="history-box">
-        <ul>
-            <li>
-                <span class="decorative-text">Did you know?</span>
-                The idea of 'coins' has been around for centuries, dating back to ancient Lydia in the 7th century BC. They were first made from a mixture of gold and silver.
-            </li>
-            <li>
-                <span class="decorative-text">Fun Fact</span>
-                The word 'tax' is derived from the Latin word 'taxo', which means 'I estimate'.
-            </li>
+        Previous Calculations:
+        <div class="decorative-line"></div>
+        <div class="screenshot-reminder">
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
+        </div>
+        <ul id="historyList">
+            <!-- List of previous results will appear here -->
         </ul>
-        <img src="ANCIENTCOINS.png" alt="Ancient Coins">
+        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
     </div>
 
-    <button class="screenshot-reminder">Reminder: Take a screenshot of your results for future reference!</button>
-
     <script>
-        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const itemPrice = parseFloat(document.getElementById('item_price').value);
-            const taxRate = parseFloat(document.getElementById('tax_rate').value);
-            const profit = parseFloat(document.getElementById('profit').value);
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputs = document.querySelectorAll('.form-group input[type="number"]');
 
-            const breakEvenPrice = itemPrice / (1 - taxRate / 100) + profit;
-            document.getElementById('break_even_price').textContent = Math.ceil(breakEvenPrice).toLocaleString();
-            document.getElementById('result').style.display = 'block';
+            inputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    this.style.width = (this.value.length + 1) * 8 + 'px';
+                });
+            });
+
+            document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                var itemPrice = parseFloat(document.getElementById('item_price').value);
+                var taxRate = parseFloat(document.getElementById('tax_rate').value);
+                var profit = parseFloat(document.getElementById('profit').value);
+
+                // Perform calculation for new price including tax and profit
+                var taxRateDecimal = taxRate / 100;
+                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
+
+                // Display result for new price including tax and profit
+                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
+
+                // Calculate total coins received after accounting for tax based on the new price
+                var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
+
+                // Display result for total coins that will appear in your gift box
+                var totalCoinsDisplay = totalCoinsReceived + " coins";
+                document.getElementById('total-coins').textContent = totalCoinsDisplay;
+
+                // Update history list
+                var historyList = document.getElementById('historyList');
+                var newHistoryItem = document.createElement('li');
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                historyList.appendChild(newHistoryItem);
+            });
         });
     </script>
 </body>

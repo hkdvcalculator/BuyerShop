@@ -239,7 +239,7 @@
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
-        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
+        <img src="IMG_0999.jpg" alt="Previous Calculations Example">
     </div>
 
     <script>
@@ -267,8 +267,7 @@
             const listItem = document.createElement("li");
             listItem.innerHTML = `
                 <span class="decorative-text">${itemName}</span><br>
-                New selling price including tax and profit: ${newSellingPrice.toFixed(2)}<br>
-                Total coins that will appear in your gift box based on the NEW selling price: ${totalCoins.toFixed(2)}
+                Price: ${itemPrice.toFixed(2)}, Tax Rate: ${taxRate.toFixed(2)}%, Profit: ${profit.toFixed(2)} ⟶ New Price: ${newSellingPrice.toFixed(2)} coins, Gift Box Coins: ${totalCoins.toFixed(2)} coins
             `;
             historyList.appendChild(listItem);
         });

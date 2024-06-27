@@ -187,42 +187,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .input-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            position: relative;
-        }
-        .input-container input[type="text"] {
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #D998A7;
-            border-radius: 5px;
-            text-align: center;
-            color: #D998A7;
-            transition: border-color 0.3s, width 0.3s;
-            width: calc(100% - 50px);
-        }
-        .input-container input[type="text"]:focus {
-            outline: none;
-            border-color: #FFC9E1;
-        }
-        .input-container input[type="button"] {
-            background-color: #FFE6F1;
-            color: #D998A7;
-            cursor: pointer;
-            border: none;
-            padding: 8px;
-            border-radius: 5px;
-            font-size: 16px;
-            position: absolute;
-            right: 0;
-            transition: background-color 0.3s ease;
-        }
-        .input-container input[type="button"]:hover {
-            background-color: #FFC9E1;
-        }
     </style>
 </head>
 <body>
@@ -265,6 +229,10 @@
 
     <div class="history-box">
         Previous Calculations:
+        <div class="decorative-line"></div>
+        <div class="screenshot-reminder">
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
+        </div>
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
@@ -305,46 +273,8 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `
-                    <div class="decorative-line"></div>
-                    <div class="input-container">
-                        <input type="text" placeholder="Type item name here">
-                        <input type="button" value="ok">
-                    </div>
-                    Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins
-                    <span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>
-                `;
+                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
-                
-                // Add functionality to save item name
-                newHistoryItem.querySelector('input[type="button"]').addEventListener('click', function() {
-                    var itemNameInput = this.previousElementSibling;
-                    var itemName = itemNameInput.value.trim();
-                    if (itemName) {
-                        itemNameInput.disabled = true;
-                        this.disabled = true;
-                    }
-                });
-                
-                // Adjust input width on typing
-                var nameInput = newHistoryItem.querySelector('input[type="text"]');
-                nameInput.addEventListener('input', function() {
-                    this.style.width = Math.max(this.value.length * 8 + 50, 100) + 'px';
-                });
-
-                // Placeholder text disappears on focus
-                nameInput.addEventListener('focus', function() {
-                    if (this.value === 'Type item name here') {
-                        this.value = '';
-                    }
-                });
-
-                // Placeholder text reappears if input is empty
-                nameInput.addEventListener('blur', function() {
-                    if (this.value.trim() === '') {
-                        this.value = 'Type item name here';
-                    }
-                });
             });
         });
     </script>

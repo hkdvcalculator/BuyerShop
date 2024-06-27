@@ -31,7 +31,8 @@
             font-weight: bold;
             color: #D998A7;
         }
-        .form-group input[type="number"] {
+        .form-group input[type="number"],
+        .form-group input[type="text"] {
             padding: 8px;
             font-size: 16px;
             border: 1px solid #D998A7;
@@ -41,7 +42,8 @@
             color: #D998A7;
             transition: border-color 0.3s, width 0.3s;
         }
-        .form-group input[type="number"]:focus {
+        .form-group input[type="number"]:focus,
+        .form-group input[type="text"]:focus {
             outline: none;
             border-color: #FFC9E1;
         }
@@ -201,6 +203,9 @@
     <div class="calculator">
         <form id="calculatorForm">
             <div class="form-group">
+                <input type="text" id="item_name" name="item_name" placeholder="Type item name here">
+            </div>
+            <div class="form-group">
                 <label for="item_price">Item Price:</label>
                 <div class="description"><strong>If you are using this for buyer/select shop</strong>, the number that goes here is the original purchase price of the item from buyer shop. For example, if you bought the item for 1000 coins, put 1000 here. <strong>If you are using this for smile market</strong>, the number that goes here is the amount you want in your gift box. You can put "0" in the "Desired Profit (coins):" section.</div>
                 <input type="number" id="item_price" name="item_price" required>
@@ -242,16 +247,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var inputs = document.querySelectorAll('.form-group input[type="number"]');
+            var itemNameInput = document.getElementById('item_name');
 
-            inputs.forEach(function(input) {
-                input.addEventListener('input', function() {
-                    this.style.width = (this.value.length + 1) * 8 + 'px';
-                });
+            itemNameInput.addEventListener('input', function() {
+                this.style.width = ((this.value.length + 1) * 8) + 'px';
+                if (this.value === "") {
+                    this.style.width = '80%';
+                }
             });
 
             document.getElementById('calculatorForm').addEventListener('submit', function(event) {
                 event.preventDefault();
 
+                var itemName = itemNameInput.value.trim();
                 var itemPrice = parseFloat(document.getElementById('item_price').value);
                 var taxRate = parseFloat(document.getElementById('tax_rate').value);
                 var profit = parseFloat(document.getElementById('profit').value);
@@ -273,7 +281,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `<strong>${itemName}</strong><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

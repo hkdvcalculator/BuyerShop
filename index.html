@@ -13,20 +13,6 @@
             margin: 0;
             padding: 0;
         }
-        .title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .title-container img {
-            width: 40px; /* Adjust the width to match the font size of the title */
-            height: auto;
-        }
-        .title-container h1 {
-            margin: 0 10px;
-            font-size: 24px; /* Adjust font size as needed */
-        }
         .calculator {
             margin: 20px auto;
             padding: 20px;
@@ -179,11 +165,7 @@
     </style>
 </head>
 <body>
-    <div class="title-container">
-        <img src="COINS.png" alt="Coin Icon">
-        <h1>HKDV Tax Calculator</h1>
-        <img src="COINS.png" alt="Coin Icon">
-    </div>
+    <h1>HKDV Tax Calculator</h1>
     <div class="info-box">
         This calculator can be used for smile market, buyer/select shop, etc. It helps you calculate the break-even price, accounting for taxes and desired coin profits.
     </div>
@@ -264,6 +246,10 @@
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
+
+                // Display the image
+                var historyImage = document.getElementById('historyImage');
+                historyImage.style.display = 'block';
             });
         });
     </script>

@@ -247,29 +247,31 @@
             event.preventDefault();
 
             const itemName = document.getElementById("item_name").value.trim() || "Item";
-            const itemPrice = parseFloat(document.getElementById("item_price").value);
+            const itemPrice = parseFloat(document.getElementById("item_price").value                const itemPrice = parseFloat(document.getElementById("item_price").value);
             const taxRate = parseFloat(document.getElementById("tax_rate").value);
             const profit = parseFloat(document.getElementById("profit").value);
 
-            if (isNaN(itemPrice) || isNaN(taxRate) || isNaN(profit)) {
-                alert("Please enter valid numbers");
-                return;
-            }
+            // Calculate new selling price including tax and profit
+            const taxAmount = (itemPrice * taxRate) / 100;
+            const sellingPrice = itemPrice + taxAmount + profit;
 
-            const taxAmount = itemPrice * (taxRate / 100);
-            const newSellingPrice = itemPrice + taxAmount + profit;
-            const totalCoins = newSellingPrice - (newSellingPrice * (taxRate / 100));
+            // Calculate total coins in gift box based on new selling price
+            const totalCoins = sellingPrice * 100;
 
-            document.querySelector("#result .output-number").textContent = newSellingPrice.toFixed(2);
-            document.getElementById("total-coins").textContent = totalCoins.toFixed(2);
+            // Display results
+            const resultElement = document.querySelector("#result .output-number");
+            resultElement.innerHTML = `<span class="output-number">${sellingPrice.toFixed(2)}</span>`;
+            const totalCoinsElement = document.querySelector("#total-coins");
+            totalCoinsElement.innerHTML = `<span class="output-number">${totalCoins.toFixed(2)}</span>`;
 
+            // Add calculation to history
             const historyList = document.getElementById("historyList");
             const listItem = document.createElement("li");
-            listItem.innerHTML = `
-                <span class="decorative-text">${itemName}</span><br>
-                Price: ${itemPrice.toFixed(2)}, Tax Rate: ${taxRate.toFixed(2)}%, Profit: ${profit.toFixed(2)} ⟶ New Price: ${newSellingPrice.toFixed(2)} coins, Gift Box Coins: ${totalCoins.toFixed(2)} coins
-            `;
-            historyList.appendChild(listItem);
+            listItem.innerHTML = `<span class="decorative-text">${itemName} - </span><span class="output-text">Selling Price: </span><span class="output-number">${sellingPrice.toFixed(2)}</span>`;
+            historyList.insertBefore(listItem, historyList.firstChild);
+
+            // Reset form fields
+            document.getElementById("calculatorForm").reset();
         });
     </script>
 </body>

@@ -162,10 +162,27 @@
             margin-top: 5px;
             margin-bottom: 10px;
         }
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .title-container img {
+            margin: 0 10px;
+        }
+        .history-box img {
+            display: block;
+            margin: 20px auto 0;
+        }
     </style>
 </head>
 <body>
-    <h1>HKDV Tax Calculator</h1>
+    <div class="title-container">
+        <img src="COINS.png" alt="Coins">
+        <h1>HKDV Tax Calculator</h1>
+        <img src="COINS.png" alt="Coins">
+    </div>
     <div class="info-box">
         This calculator can be used for smile market, buyer/select shop, etc. It helps you calculate the break-even price, accounting for taxes and desired coin profits.
     </div>
@@ -207,6 +224,7 @@
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
+        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
     </div>
 
     <script>

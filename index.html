@@ -162,26 +162,10 @@
             margin-top: 5px;
             margin-bottom: 10px;
         }
-        .calculator-title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px; /* Adjust the font size as needed */
-            margin-bottom: 20px;
-        }
-        .calculator-title img {
-            margin: 0 10px; /* Adjust margin as needed */
-            width: 24px; /* Adjust width as needed */
-            height: 24px; /* Adjust height as needed */
-        }
     </style>
 </head>
 <body>
-    <div class="calculator-title">
-        <img src="COINS.png" alt="Coins Image">
-        <h1>HKDV Tax Calculator</h1>
-        <img src="COINS.png" alt="Coins Image">
-    </div>
+    <h1>HKDV Tax Calculator</h1>
     <div class="info-box">
         This calculator can be used for smile market, buyer/select shop, etc. It helps you calculate the break-even price, accounting for taxes and desired coin profits.
     </div>
@@ -200,7 +184,7 @@
 
             <div class="form-group">
                 <label for="profit">Desired Profit (coins):</label>
-                <div class="description"><strong>Buyer/Select Shop Example</strong>; if the item was initially bought at 1000 coins during buyer shop and you want to earn an extra 100 coins as profit when you sell during select shop, enter 100 here.</div>
+                <div class="description">For example, if the item was initially bought at 1000 coins and you want to earn an extra 100 coins as profit, enter 100 here.</div>
                 <input type="number" id="profit" name="profit" required>
             </div>
 
@@ -223,7 +207,6 @@
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
-        <img id="historyImage" src="IMG_0999.jpg" alt="Calculation History Image" style="display:none; width: 100%; margin-top: 20px;">
     </div>
 
     <script>
@@ -241,11 +224,11 @@
 
                 var itemPrice = parseFloat(document.getElementById('item_price').value);
                 var taxRate = parseFloat(document.getElementById('tax_rate').value);
-                var profit = parseFloat(document.getElementById('profit').                var profit = parseFloat(document.getElementById('profit').value);
+                var profit = parseFloat(document.getElementById('profit').value);
 
                 // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;
-                var totalPrice = Math.ceil((itemPrice + profit) / (1 - taxRateDecimal));
+                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
 
                 // Display result for new price including tax and profit
                 document.querySelector('#result .output-number').textContent = totalPrice + " coins";
@@ -262,10 +245,6 @@
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
-
-                // Display the image
-                var historyImage = document.getElementById('historyImage');
-                historyImage.style.display = 'block';
             });
         });
     </script>

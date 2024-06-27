@@ -222,30 +222,6 @@
         .label-container input[type="button"]:hover {
             background-color: #FFC9E1;
         }
-        .label {
-            font-weight: bold;
-            color: #D998A7;
-            background-color: white;
-            padding: 5px;
-            display: inline-block;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .edit-button {
-            background-color: #FFE6F1;
-            color: #D998A7;
-            cursor: pointer;
-            border: 1px solid #D998A7;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-            margin-top: 5px;
-        }
-        .edit-button:hover {
-            background-color: #FFC9E1;
-        }
     </style>
 </head>
 <body>
@@ -267,110 +243,101 @@
 
             <div class="form-group">
                 <label for="tax_rate">Tax Rate (%):</label>
-                <div class="description"><strong>If you are using this for buyer/select shop</strong>, the number that goes here is always 5%. <strong>If you are using this for smile market</strong>, put the correct tax rate depending on your member rank (Silver: 9%, Gold: 7%, Platinum: 5%).</div>
                 <input type="number" id="tax_rate" name="tax_rate" required>
             </div>
 
             <div class="form-group">
                 <label for="profit">Desired Profit (coins):</label>
-                <div class="description"><strong>If you are using this for buyer/select shop</strong>, this is the amount you want to earn after buying the item from buyer shop and listing it for sale in smile market. <strong>If you are using this for smile market</strong>, put "0" here. </div>
+                <div class="description"><strong>Buyer/Select Shop Example</strong>; if the item was initially bought at 1000 coins during buyer shop and you want to earn an extra 100 coins as profit when you sell during select shop, enter 100 here.</div>
                 <input type="number" id="profit" name="profit" required>
             </div>
 
             <input type="submit" value="Calculate">
         </form>
+        <div id="result">
+            <p class="output-text">New selling price including tax and profit:</p>
+            <p class="output-number"></p>
+            <p class="output-text">Total coins that will appear in your gift box based on the NEW selling price:</p>
+            <p class="output-number" id="total-coins"></p>
+        </div>
     </div>
-    <div id="result" class="result">
-        <p>The lowest price you can list your item for in the market is <span class="output-number"></span> in order to receive <span id="total-coins" class="output-number"></span> in your gift box.</p>
-    </div>
+
     <div class="history-box">
-        <h2>Calculation History</h2>
-        <ul id="historyList"></ul>
-        <img src="COINS.png" alt="Coins">
+        Previous Calculations:
+        <div class="decorative-line"></div>
+        <div class="screenshot-reminder">
+            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
+        </div>
+        <ul id="historyList">
+            <!-- List of previous results will appear here -->
+        </ul>
+        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
     </div>
-    <div class="screenshot-reminder">
-        For documentation purposes, please take a screenshot after every calculation.
-    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputs = document.querySelectorAll('.form-group input[type="number"]');
+
+            inputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    this.style.width = (this.value.length + 1) * 8 + 'px';
+                });
+            });
+
+            document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                var itemPrice = parseFloat(document.getElementById('item_price').value);
+                var taxRate = parseFloat(document.getElementById('tax_rate').value);
+                var profit = parseFloat(document.getElementById('profit').value);
+
+                // Perform calculation for new price including tax and profit
+                var taxRateDecimal = taxRate / 100;
+                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
+
+                // Display result for new price including tax and profit
+                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
+
+                // Calculate total coins received after accounting for tax based on the new price
+                var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
+
+                // Display result for total coins that will appear in your gift box
+                var totalCoinsDisplay = totalCoinsReceived + " coins";
+                document.getElementById('total-coins').textContent = totalCoinsDisplay;
+
+                // Update history list
+                var historyList = document.getElementById('historyList');
+                var newHistoryItem = document.createElement('li');
+
+                // Create label input and button
+                var labelContainer = document.createElement('div');
+                labelContainer.className = 'label-container';
+
+                var labelInput = document.createElement('input');
+                labelInput.type = 'text';
+                labelInput.placeholder = 'Type item name here';
+                labelInput.className = 'label-input';
+
+                var labelButton = document.createElement('input');
+                labelButton.type = 'button';
+                labelButton.value = 'OK';
+                labelButton.className = 'label-button';
+
+                labelButton.addEventListener('click', function() {
+                    var labelText = labelInput.value.trim();
+                    if (labelText) {
+                        labelInput.value = labelText; // Ensure the input box retains the label
+                    }
+                });
+
+                labelContainer.appendChild(labelInput);
+                labelContainer.appendChild(labelButton);
+                newHistoryItem.appendChild(labelContainer);
+
+                newHistoryItem.innerHTML += `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                historyList.appendChild(newHistoryItem);
+            });
+        });
+    </script>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var inputs = document.querySelectorAll('.form-group input[type="number"]');
-
-        inputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                this.style.width = (this.value.length + 1) * 8 + 'px';
-            });
-        });
-
-        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var itemPrice = parseFloat(document.getElementById('item_price').value);
-            var taxRate = parseFloat(document.getElementById('tax_rate').value);
-            var profit = parseFloat(document.getElementById('profit').value);
-
-            // Perform calculation for new price including tax and profit
-            var taxRateDecimal = taxRate / 100;
-            var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
-
-            // Display result for new price including tax and profit
-            document.querySelector('#result .output-number').textContent = totalPrice + " coins";
-
-            // Calculate total coins received after accounting for tax based on the new price
-            var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
-
-            // Display result for total coins that will appear in your gift box
-            var totalCoinsDisplay = totalCoinsReceived + " coins";
-            document.getElementById('total-coins').textContent = totalCoinsDisplay;
-
-            // Update history list
-            var historyList = document.getElementById('historyList');
-            var newHistoryItem = document.createElement('li');
-
-            // Create label input and button
-            var labelContainer = document.createElement('div');
-            labelContainer.className = 'label-container';
-
-            var labelInput = document.createElement('input');
-            labelInput.type = 'text';
-            labelInput.placeholder = 'Type item name here';
-            labelInput.className = 'label-input';
-
-            var labelButton = document.createElement('input');
-            labelButton.type = 'button';
-            labelButton.value = 'OK';
-            labelButton.className = 'label-button';
-
-            labelButton.addEventListener('click', function() {
-                var labelText = labelInput.value.trim();
-                if (labelText) {
-                    var label = document.createElement('div');
-                    label.className = 'label';
-                    label.textContent = labelText;
-
-                    var editButton = document.createElement('button');
-                    editButton.className = 'edit-button';
-                    editButton.textContent = 'click to edit label';
-                    editButton.addEventListener('click', function() {
-                        labelContainer.innerHTML = '';
-                        labelContainer.appendChild(labelInput);
-                        labelContainer.appendChild(labelButton);
-                        labelInput.value = labelText; // Preserve the current label text
-                    });
-
-                    labelContainer.innerHTML = '';
-                    labelContainer.appendChild(label);
-                    labelContainer.appendChild(editButton);
-                }
-            });
-
-            labelContainer.appendChild(labelInput);
-            labelContainer.appendChild(labelButton);
-            newHistoryItem.appendChild(labelContainer);
-
-            newHistoryItem.innerHTML += `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
-            historyList.appendChild(newHistoryItem);
-        });
-    });
-</script>
 </html>

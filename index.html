@@ -105,15 +105,23 @@
             margin: 10px 0 0;
         }
         .history-box ul li {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             color: #D998A7;
-            position: relative;
             text-align: center;
-            padding-top: 30px;
             font-size: 16px;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
+        }
+        .history-box ul li strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .history-box ul li .details {
+            display: block;
+            font-weight: normal;
+            font-size: 14px;
+            margin-top: 5px;
         }
         .history-box ul li::before {
             content: "";
@@ -128,7 +136,7 @@
         }
         .history-box ul li span.decorative-text {
             position: absolute;
-            top: 10px;
+            bottom: 10px;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
@@ -186,8 +194,6 @@
             max-width: 100%;
             height: auto;
             width: 80%;
-            margin-left: auto;
-            margin-right: auto;
         }
         .highlight {
             background-color: #FFFFFF;
@@ -241,58 +247,69 @@
     </div>
 
     <div class="history-box">
-        Previous Calculations:
-        <div class="decorative-line"></div>
-        <div class="screenshot-reminder">
-            Be sure to screenshot this if needed, the results disappear when you leave or refresh this page
-        </div>
-        <ul id="historyList">
-            <!-- List of previous results will appear here -->
-        </ul>
-        <img src="IMG_0999.jpg" alt="Previous Calculations Image">
+    <p>Previous Calculations:</p>
+    <div class="decorative-line"></div>
+    <div class="screenshot-reminder">
+        Be sure to screenshot this if needed; the results disappear when you leave or refresh this page.
     </div>
+    <ul id="historyList">
+        <!-- List of previous results will appear here -->
+    </ul>
+    <img src="IMG_0999.jpg" alt="Previous Calculations Image" class="history-image">
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var inputs = document.querySelectorAll('.form-group input[type="number"]');
-            var itemNameInput = document.getElementById('item_name');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var inputs = document.querySelectorAll('.form-group input[type="number"]');
+        var itemNameInput = document.getElementById('item_name');
 
-            itemNameInput.addEventListener('input', function() {
-                this.style.width = ((this.value.length + 1) * 8) + 'px';
-                if (this.value === "") {
-                    this.style.width = '80%';
-                }
-            });
-
-            document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                var itemName = itemNameInput.value.trim();
-                var itemPrice = parseFloat(document.getElementById('item_price').value);
-                var taxRate = parseFloat(document.getElementById('tax_rate').value);
-                var profit = parseFloat(document.getElementById('profit').value);
-
-                // Perform calculation for new price including tax and profit
-                var taxRateDecimal = taxRate / 100;
-                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
-
-                // Display result for new price including tax and profit
-                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
-
-                // Calculate total coins received after accounting for tax based on the new price
-                var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
-
-                // Display result for total coins that will appear in your gift box
-                var totalCoinsDisplay = totalCoinsReceived + " coins";
-                document.getElementById('total-coins').textContent = totalCoinsDisplay;
-
-                // Update history list
-                var historyList = document.getElementById('historyList');
-                var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `<strong><span class="highlight">${itemName}</span></strong><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
-                historyList.appendChild(newHistoryItem);
-            });
+        itemNameInput.addEventListener('input', function() {
+            this.style.width = ((this.value.length + 1) * 8) + 'px';
+            if (this.value === "") {
+                this.style.width = '80%';
+            }
         });
-    </script>
-</body>
-</html>
+
+        document.getElementById('calculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var itemName = itemNameInput.value.trim();
+            var itemPrice = parseFloat(document.getElementById('item_price').value);
+            var taxRate = parseFloat(document.getElementById('tax_rate').value);
+            var profit = parseFloat(document.getElementById('profit').value);
+
+            // Perform calculation for new price including tax and profit
+            var taxRateDecimal = taxRate / 100;
+            var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
+
+            // Display result for new price including tax and profit
+            document.querySelector('#result .output-number').textContent = totalPrice + " coins";
+
+            // Calculate total coins received after accounting for tax based on the new price
+            var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
+
+            // Display result for total coins that will appear in your gift box
+            var totalCoinsDisplay = totalCoinsReceived + " coins";
+            document.getElementById('total-coins').textContent = totalCoinsDisplay;
+
+            // Update history list
+            var historyList = document.getElementById('historyList');
+            var newHistoryItem = document.createElement('li');
+            newHistoryItem.innerHTML = `
+                <strong>${itemName}</strong>
+                <div class="details">
+                    <p>Price: ${itemPrice} coins, Tax Rate: ${taxRate}%, Profit: ${profit} coins</p>
+                    <p>New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins</p>
+                </div>
+                <span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>
+            `;
+            historyList.appendChild(newHistoryItem);
+
+            // Clear form inputs after calculation
+            document.getElementById('item_name').value = "";
+            document.getElementById('item_price').value = "";
+            document.getElementById('tax_rate').value = "";
+            document.getElementById('profit').value = "";
+        });
+    });
+</script>

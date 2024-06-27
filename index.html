@@ -292,7 +292,7 @@
                 // Update history list
                 var historyList = document.getElementById('historyList');
                 var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `<br><strong><span class="highlight">${itemName}</span></strong><br><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
+                newHistoryItem.innerHTML = `<br><strong><span class="highlight">${itemName}</span></strong><br>Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
             });
         });

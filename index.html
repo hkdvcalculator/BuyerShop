@@ -222,6 +222,30 @@
         .label-container input[type="button"]:hover {
             background-color: #FFC9E1;
         }
+        .label {
+            font-weight: bold;
+            color: #D998A7;
+            background-color: white;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .edit-button {
+            background-color: #FFE6F1;
+            color: #D998A7;
+            cursor: pointer;
+            border: 1px solid #D998A7;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin-top: 5px;
+        }
+        .edit-button:hover {
+            background-color: #FFC9E1;
+        }
     </style>
 </head>
 <body>
@@ -326,7 +350,22 @@
                 labelButton.addEventListener('click', function() {
                     var labelText = labelInput.value.trim();
                     if (labelText) {
-                        labelInput.value = labelText; // Ensure the input box retains the label
+                        var label = document.createElement('div');
+                        label.className = 'label';
+                        label.textContent = labelText;
+
+                        var editButton = document.createElement('button');
+                        editButton.className = 'edit-button';
+                        editButton.textContent = 'click to edit label';
+                        editButton.addEventListener('click', function() {
+                            labelContainer.innerHTML = '';
+                            labelContainer.appendChild(labelInput);
+                            labelContainer.appendChild(labelButton);
+                        });
+
+                        labelContainer.innerHTML = '';
+                        labelContainer.appendChild(label);
+                        labelContainer.appendChild(editButton);
                     }
                 });
 

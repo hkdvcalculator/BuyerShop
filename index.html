@@ -31,7 +31,7 @@
             font-weight: bold;
             color: #D998A7;
         }
-        .form-group input[type="number"] {
+        .form-group input[type="number"], .form-group input[type="text"] {
             padding: 8px;
             font-size: 16px;
             border: 1px solid #D998A7;
@@ -41,7 +41,7 @@
             color: #D998A7;
             transition: border-color 0.3s, width 0.3s;
         }
-        .form-group input[type="number"]:focus {
+        .form-group input[type="number"]:focus, .form-group input[type="text"]:focus {
             outline: none;
             border-color: #FFC9E1;
         }
@@ -201,6 +201,9 @@
     <div class="calculator">
         <form id="calculatorForm">
             <div class="form-group">
+                <input type="text" id="item_name" name="item_name" placeholder="Type item name here">
+            </div>
+            <div class="form-group">
                 <label for="item_price">Item Price:</label>
                 <div class="description"><strong>If you are using this for buyer/select shop</strong>, the number that goes here is the original purchase price of the item from buyer shop. For example, if you bought the item for 1000 coins, put 1000 here. <strong>If you are using this for smile market</strong>, the number that goes here is the amount you want in your gift box. You can put "0" in the "Desired Profit (coins):" section.</div>
                 <input type="number" id="item_price" name="item_price" required>
@@ -240,42 +243,34 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var inputs = document.querySelectorAll('.form-group input[type="number"]');
+        document.getElementById("calculatorForm").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-            inputs.forEach(function(input) {
-                input.addEventListener('input', function() {
-                    this.style.width = (this.value.length + 1) * 8 + 'px';
-                });
-            });
+            const itemName = document.getElementById("item_name").value.trim() || "Item";
+            const itemPrice = parseFloat(document.getElementById("item_price").value);
+            const taxRate = parseFloat(document.getElementById("tax_rate").value);
+            const profit = parseFloat(document.getElementById("profit").value);
 
-            document.getElementById('calculatorForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+            if (isNaN(itemPrice) || isNaN(taxRate) || isNaN(profit)) {
+                alert("Please enter valid numbers");
+                return;
+            }
 
-                var itemPrice = parseFloat(document.getElementById('item_price').value);
-                var taxRate = parseFloat(document.getElementById('tax_rate').value);
-                var profit = parseFloat(document.getElementById('profit').value);
+            const taxAmount = itemPrice * (taxRate / 100);
+            const newSellingPrice = itemPrice + taxAmount + profit;
+            const totalCoins = newSellingPrice - (newSellingPrice * (taxRate / 100));
 
-                // Perform calculation for new price including tax and profit
-                var taxRateDecimal = taxRate / 100;
-                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
+            document.querySelector("#result .output-number").textContent = newSellingPrice.toFixed(2);
+            document.getElementById("total-coins").textContent = totalCoins.toFixed(2);
 
-                // Display result for new price including tax and profit
-                document.querySelector('#result .output-number').textContent = totalPrice + " coins";
-
-                // Calculate total coins received after accounting for tax based on the new price
-                var totalCoinsReceived = Math.ceil(totalPrice - (totalPrice * taxRateDecimal));
-
-                // Display result for total coins that will appear in your gift box
-                var totalCoinsDisplay = totalCoinsReceived + " coins";
-                document.getElementById('total-coins').textContent = totalCoinsDisplay;
-
-                // Update history list
-                var historyList = document.getElementById('historyList');
-                var newHistoryItem = document.createElement('li');
-                newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
-                historyList.appendChild(newHistoryItem);
-            });
+            const historyList = document.getElementById("historyList");
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <span class="decorative-text">${itemName}</span><br>
+                New selling price including tax and profit: ${newSellingPrice.toFixed(2)}<br>
+                Total coins that will appear in your gift box based on the NEW selling price: ${totalCoins.toFixed(2)}
+            `;
+            historyList.appendChild(listItem);
         });
     </script>
 </body>

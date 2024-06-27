@@ -207,6 +207,7 @@
         <ul id="historyList">
             <!-- List of previous results will appear here -->
         </ul>
+        <img id="historyImage" src="IMG_0999.jpg" alt="Calculation History Image" style="display:none; width: 100%; margin-top: 20px;">
     </div>
 
     <script>
@@ -228,7 +229,7 @@
 
                 // Perform calculation for new price including tax and profit
                 var taxRateDecimal = taxRate / 100;
-                var totalPrice = Math.floor((itemPrice + profit) / (1 - taxRateDecimal));
+                var totalPrice = Math.ceil((itemPrice + profit) / (1 - taxRateDecimal));
 
                 // Display result for new price including tax and profit
                 document.querySelector('#result .output-number').textContent = totalPrice + " coins";
@@ -245,6 +246,10 @@
                 var newHistoryItem = document.createElement('li');
                 newHistoryItem.innerHTML = `Price: ${itemPrice}, Tax Rate: ${taxRate}%, Profit: ${profit} ⟶ New Price: ${totalPrice} coins, Gift Box Coins: ${totalCoinsReceived} coins<span class="decorative-text">⋅˚₊‧𐙚‧₊˚ ⋅</span>`;
                 historyList.appendChild(newHistoryItem);
+
+                // Display the image
+                var historyImage = document.getElementById('historyImage');
+                historyImage.style.display = 'block';
             });
         });
     </script>
